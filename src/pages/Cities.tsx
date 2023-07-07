@@ -14,14 +14,12 @@ export const Cities = () => {
 
   const [search, setSearch] = useState<string>("");
   const citiesDetails: any = useSelector(ListOfCities);
-  const cities = citiesDetails.data;
+  const cities = citiesDetails?.data;
   const fetchCities = async () => {
     // await dispatch(GetCitiesLocation({}));
   };
 
-  console.log("cities", cities);
   useEffect(() => {
-    console.log("emad");
     fetchCities();
   }, []);
 
