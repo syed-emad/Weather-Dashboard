@@ -3,7 +3,6 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import { citiesReducer } from "./slice/CitiesSlice";
 import { geoDBApi, openWeatherApi } from "../axiosInstances";
-import { AxiosRequestConfig } from "axios";
 import { geoLocationReducer } from "./slice/GeoLocationSlice";
 
 const allReducers = combineReducers({

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IThunk } from "../../storeTypes";
+import { IThunk } from "../storeTypes";
 import { getCityWeatherDetail } from "../serivce/CitiesService";
 
 interface CitiesState {}
