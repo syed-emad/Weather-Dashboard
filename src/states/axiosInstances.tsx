@@ -11,3 +11,7 @@ export const geoDBApi = axios.create({
     "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
   },
 });
+
+export const countriesApi = axios.create({
+  baseURL: "https://restcountries.com/v3.1/",
+});
