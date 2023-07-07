@@ -1,6 +1,6 @@
-import React, { ChangeEventHandler } from "react";
+import React from "react";
 interface Props {
-  onChange: (key: string) => ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
   inputKey: string;
 }
@@ -9,7 +9,7 @@ export const TextBox = ({ onChange, value, inputKey }: Props) => {
     <>
       <input
         id={inputKey}
-        onChange={onChange(inputKey)}
+        onChange={onChange}
         value={value}
         type="text"
         placeholder="Type something"
