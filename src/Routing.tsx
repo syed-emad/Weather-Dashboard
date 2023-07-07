@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Cities } from "./pages/Cities";
+import { CityDetail } from "./pages/CityDetail";
 
 interface RouteType {
   path: string;
@@ -21,5 +22,9 @@ const RouteList: Array<RouteType> = [
   {
     path: "/",
     component: <Cities />,
+  },
+  {
+    path: "/city/detail",
+    component: <CityDetail />,
   },
 ];

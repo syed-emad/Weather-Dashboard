@@ -4,6 +4,7 @@ import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSli
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../states/redux-store/store";
 import { debounce } from "../../util";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   cities: any;
@@ -14,7 +15,7 @@ const headings = ["City", "Country", "Region", "Population"];
 export const CitiesTable = ({ cities, paginationData }: Props) => {
   const [curentPage, setCurrentPage] = useState<number>(0);
   const dispatch = useDispatch<AppDispatch>();
-
+  const navigate = useNavigate();
   const handlePageChange = (page: any) => {
     debounce(async () => {
       var selectedPage = page?.selected;
@@ -25,6 +26,9 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
     }, 1000);
   };
 
+  const handleRowClick = (long: number, lat: number) => {
+    navigate(`/city/detail?long=${long}&lat=${lat}`);
+  };
   return (
     <div className="w-full">
       <div className="overflow-hidden shadow rounded-lg bg-pink-100 ">
@@ -45,7 +49,11 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
           <tbody className="divide-y divide-gray-100 bg-white">
             {cities?.length &&
               cities?.map((city: any, index: number) => (
-                <tr key={index} className="hover:bg-gray-50" onClick={() => {}}>
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50"
+                  onClick={() => handleRowClick(city.longitude, city.latitude)}
+                >
                   <td className="py-4 pl-4 text-sm text-gray-700">
                     {city.name}
                   </td>
