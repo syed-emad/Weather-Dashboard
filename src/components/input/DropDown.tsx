@@ -20,7 +20,7 @@ export const DropDown = ({
         onChange={onChange(dropDownKey)}
       >
         <option value={`-1`}></option>
-        <option value={`0`}>All</option>
+        <option value={`0`}>All </option>
         {list?.length > 0 &&
           list?.map((item: any, index: number) => (
             <option value={item.value} key={index}>

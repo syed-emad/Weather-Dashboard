@@ -87,7 +87,7 @@ export const CityDetail = () => {
             ))}
           </div>
           <div className="w-2/5 bg-white rounded-lg shadow-sm flex justify-between items-center px-5">
-            <div className="flex space-x-5  h-full w-fit items-center" key={1}>
+            <div className="flex space-x-5  h-full w-fit items-center" key={2}>
               <img src={IMAGES.sunrise} alt="cloudy" className="w-14 h-w-14" />
               <div className="">
                 <Paragraph text={"Sunrise"} />
@@ -97,7 +97,7 @@ export const CityDetail = () => {
                 />
               </div>
             </div>
-            <div className="flex space-x-2  h-full w-fit items-center" key={1}>
+            <div className="flex space-x-2  h-full w-fit items-center" key={31}>
               <img src={IMAGES.sunset} alt="cloudy" className="w-14 h-w-14" />
               <div className="">
                 <Paragraph text={"Sunrise"} />
