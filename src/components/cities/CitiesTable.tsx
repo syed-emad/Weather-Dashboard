@@ -3,6 +3,7 @@ import { Pagination } from "../Pagination";
 import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../states/redux-store/store";
+import { debounce } from "../../util";
 
 interface Props {
   cities: any;
@@ -14,11 +15,15 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
   const [curentPage, setCurrentPage] = useState<number>(0);
   const dispatch = useDispatch<AppDispatch>();
 
-  const handlePageChange = async (page: any) => {
-    var selectedPage = page?.selected;
-    setCurrentPage(selectedPage);
-    await dispatch(GetCitiesLocation({ offset: selectedPage * 10, limit: 10 }));
-    console.log(selectedPage);
+  const handlePageChange = (page: any) => {
+    debounce(async () => {
+      var selectedPage = page?.selected;
+      setCurrentPage(selectedPage);
+      await dispatch(
+        GetCitiesLocation({ offset: selectedPage * 10, limit: 10 })
+      );
+      console.log(selectedPage);
+    }, 1000);
   };
 
   return (
