@@ -1,5 +1,7 @@
 import { ChangeEvent } from "react";
 import { TextBox } from "../input/TextBox";
+import { DropDown } from "../input/DropDown";
+import { Heading } from "../titles/Heading";
 
 interface Props {
   search: string;
@@ -8,9 +10,23 @@ interface Props {
 export const Filter = ({ search, setSearch }: Props) => {
   const hanldeTextBoxChange =
     (key: string) => (evt: ChangeEvent<HTMLInputElement>) => {};
+  const handleDropDownChange =
+    (key: string) => (evt: ChangeEvent<HTMLSelectElement>) => {};
   return (
-    <div className="w-full p-6 mb-5 shadow-sm bg-white rouded-md">
-      <TextBox value="test" inputKey="search" onChange={hanldeTextBoxChange} />
+    <div className="flex space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md">
+      <div className="w-3/4">
+        <Heading text="Search" />
+        <TextBox value="" inputKey="search" onChange={hanldeTextBoxChange} />
+      </div>
+      <div className="w-1/4">
+        <Heading text="Country" />
+        <DropDown
+          dropDownKey="emd"
+          selectedValue="something"
+          list={[""]}
+          onChange={handleDropDownChange}
+        />
+      </div>
     </div>
   );
 };

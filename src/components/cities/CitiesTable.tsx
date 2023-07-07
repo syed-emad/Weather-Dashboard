@@ -22,7 +22,6 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
       await dispatch(
         GetCitiesLocation({ offset: selectedPage * 10, limit: 10 })
       );
-      console.log(selectedPage);
     }, 1000);
   };
 

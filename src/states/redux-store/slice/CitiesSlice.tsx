@@ -14,7 +14,6 @@ export const GetCityWeatherDetails = createAsyncThunk<
   async ({ lat, long, exclude, appId }, { rejectWithValue }) => {
     try {
       const response = await getCityWeatherDetail(lat, long, exclude, appId);
-      console.log("hhh", response);
       return response;
     } catch (e) {}
   }

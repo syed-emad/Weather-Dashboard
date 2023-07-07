@@ -1,11 +1,19 @@
 let debounceTimeout: any;
+let lastButtonClickTime = 0;
 export const debounce = (callback: any, delay: number) => {
-  if (debounceTimeout == null) {
-    debounceTimeout = setTimeout(callback, 0);
-  } else {
+  const now = Date.now();
+  const timeSinceLastClick = now - lastButtonClickTime;
+  lastButtonClickTime = now;
+  if (debounceTimeout) {
     clearTimeout(debounceTimeout);
-    setTimeout(callback, delay);
-    debounceTimeout = null;
   }
-  console.log(debounceTimeout);
+  console.log("asd", timeSinceLastClick);
+  if (timeSinceLastClick > 1000) {
+    callback();
+  } else {
+    debounceTimeout = setTimeout(() => {
+      callback();
+      debounceTimeout = null;
+    }, delay);
+  }
 };
