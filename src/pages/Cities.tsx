@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { PageWrapper } from "../components/PageWrapper";
 import { CitiesTable } from "../components/cities/CitiesTable";
-import { Filter } from "../components/input/Filter";
+import { Filter } from "../components/cities/Filter";
 import { AppDispatch } from "../states/redux-store/store";
 import {
   GetCitiesLocation,

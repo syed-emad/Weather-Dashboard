@@ -1,15 +1,30 @@
-import ReactPaginate from "react-paginate";
+import { useState } from "react";
+import { Pagination } from "../Pagination";
+import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../states/redux-store/store";
 
 interface Props {
   cities: any;
   paginationData?: any;
 }
 const headings = ["City", "Country", "Region", "Population"];
+
 export const CitiesTable = ({ cities, paginationData }: Props) => {
+  const [curentPage, setCurrentPage] = useState<number>(0);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handlePageChange = async (page: any) => {
+    var selectedPage = page?.selected;
+    setCurrentPage(selectedPage);
+    await dispatch(GetCitiesLocation({ offset: selectedPage * 10, limit: 10 }));
+    console.log(selectedPage);
+  };
+
   return (
     <div className="w-full">
       <div className="overflow-hidden shadow rounded-lg bg-pink-100 ">
-        <table className="w-full   divide-y divide-gray-200 border-solid">
+        <table className="w-full divide-y divide-gray-200 border-solid">
           <thead className="bg-gray-100  ">
             <tr>
               {headings?.map((heading, index: number) => (
@@ -26,7 +41,7 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
           <tbody className="divide-y divide-gray-100 bg-white">
             {cities?.length &&
               cities?.map((city: any, index: number) => (
-                <tr key={index}>
+                <tr key={index} className="hover:bg-gray-50" onClick={() => {}}>
                   <td className="py-4 pl-4 text-sm text-gray-700">
                     {city.name}
                   </td>
@@ -37,25 +52,11 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
               ))}
           </tbody>
         </table>
-        <div className="flex  items-center justify-center py-3 bg-gray-50 sm:px-6">
-          <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
-            forcePage={0}
-            pageCount={10}
-            breakLabel={"..."}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={3}
-            activeLinkClassName={
-              "bg-blue-50 border-blue-900 hover:bg-blue-300 text-gray-900"
-            }
-            pageLinkClassName={
-              "px-4 py-2 m-1 border-t-2 hover:bg-gray-100 text-gray-500  "
-            }
-            nextLinkClassName={"px-4 py-2 m-1  "}
-            previousLinkClassName={"px-4 py-2 m-1  "}
-            breakLinkClassName={"px-4 py-2  "}
-            containerClassName={"flex"}
+        <div className="flex items-center justify-center py-3 bg-gray-50 sm:px-6">
+          <Pagination
+            totalPages={10}
+            currentPage={curentPage}
+            onPageChange={handlePageChange}
           />
         </div>
       </div>
