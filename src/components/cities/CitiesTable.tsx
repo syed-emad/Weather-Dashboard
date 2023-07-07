@@ -2,7 +2,7 @@ import React from "react";
 
 export const CitiesTable = () => {
   return (
-    <div className="w-full py-2 px-8 ">
+    <div className="w-full">
       <div className="overflow-hidden shadow rounded-lg bg-pink-100 ">
         <table className="w-full divide-y divide-gray-200">
           <thead className="bg-gray-50  ">
