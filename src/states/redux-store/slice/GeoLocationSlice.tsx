@@ -54,4 +54,6 @@ const geoLocationSlice = createSlice({
 });
 
 export const ListOfCities = (state: RootState) => state.geoLocation.cities;
+export const ListOfCountries = (state: RootState) =>
+  state.geoLocation.countries;
 export const geoLocationReducer = geoLocationSlice.reducer;
