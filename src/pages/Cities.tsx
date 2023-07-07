@@ -22,9 +22,9 @@ export const Cities = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-100 bg-white">
             <tr>
-              <td>city</td>
+              <td className="py-3 pl-2 text-sm text-gray-700">city</td>
               <td>country</td>
               <td>region</td>
               <td>population</td>
