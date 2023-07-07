@@ -4,9 +4,11 @@ import storage from "redux-persist/es/storage";
 import { citiesReducer } from "./slice/CitiesSlice";
 import { geoDBApi, openWeatherApi } from "../axiosInstances";
 import { AxiosRequestConfig } from "axios";
+import { geoLocationReducer } from "./slice/GeoLocationSlice";
 
 const allReducers = combineReducers({
   cities: citiesReducer,
+  geoLocation: geoLocationReducer,
 });
 const persistConfig = {
   key: "root",
