@@ -18,7 +18,7 @@ export const Cities = () => {
   const fetchCities = async () => {
     // await dispatch(GetCitiesLocation({}));
   };
-
+  console.log("ok");
   useEffect(() => {
     fetchCities();
   }, []);

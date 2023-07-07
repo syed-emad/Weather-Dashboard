@@ -3,7 +3,7 @@ import { Pagination } from "../Pagination";
 import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../states/redux-store/store";
-import { debounce } from "../../util";
+import { debounce } from "../../util/Helpers";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

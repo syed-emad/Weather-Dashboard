@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 let debounceTimeout: any;
 let lastButtonClickTime = 0;
 export const debounce = (callback: any, delay: number) => {
@@ -16,4 +17,16 @@ export const debounce = (callback: any, delay: number) => {
       debounceTimeout = null;
     }, delay);
   }
+};
+
+export const classNames = (...classes: string[]) => {
+  return classes.filter(Boolean).join(" ");
+};
+
+export const convertToCelcius = (temperatureInKelvin: number) => {
+  return Math.round(temperatureInKelvin - 273.15);
+};
+
+export const getDay = (timestamp: number) => {
+  return DateTime.fromSeconds(timestamp).weekdayLong;
 };
