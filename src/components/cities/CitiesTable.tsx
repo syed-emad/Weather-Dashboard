@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
 import { Pagination } from "../Pagination";
-import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../states/redux-store/store";
 import { useNavigate } from "react-router-dom";
-import debounce from "lodash.debounce";
 
 interface Props {
   cities: any;
