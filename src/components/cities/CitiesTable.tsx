@@ -1,29 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pagination } from "../Pagination";
 import { GetCitiesLocation } from "../../states/redux-store/slice/GeoLocationSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../states/redux-store/store";
-import { debounce } from "../../util/Helpers";
 import { useNavigate } from "react-router-dom";
+import debounce from "lodash.debounce";
 
 interface Props {
   cities: any;
-  paginationData?: any;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  totalPages: number;
 }
 const headings = ["City", "Country", "Region", "Population"];
 
-export const CitiesTable = ({ cities, paginationData }: Props) => {
-  const [curentPage, setCurrentPage] = useState<number>(0);
-  const dispatch = useDispatch<AppDispatch>();
+export const CitiesTable = ({
+  cities,
+  currentPage,
+  setCurrentPage,
+  totalPages,
+}: Props) => {
   const navigate = useNavigate();
+
   const handlePageChange = (page: any) => {
-    debounce(async () => {
-      var selectedPage = page?.selected;
-      setCurrentPage(selectedPage);
-      await dispatch(
-        GetCitiesLocation({ offset: selectedPage * 10, limit: 10 })
-      );
-    }, 1000);
+    var selectedPage = page?.selected;
+    setCurrentPage(selectedPage);
   };
 
   const handleRowClick = (long: number, lat: number) => {
@@ -66,8 +67,8 @@ export const CitiesTable = ({ cities, paginationData }: Props) => {
         </table>
         <div className="flex items-center justify-center py-3 bg-gray-50 sm:px-6">
           <Pagination
-            totalPages={10}
-            currentPage={curentPage}
+            totalPages={totalPages}
+            currentPage={currentPage}
             onPageChange={handlePageChange}
           />
         </div>
