@@ -24,7 +24,7 @@ const geoLocationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(GetCitiesLocation.fulfilled, (state, action) => {
       const { payload } = action;
-      state.cities = payload.data;
+      state.cities = payload?.data;
     });
   },
 });
