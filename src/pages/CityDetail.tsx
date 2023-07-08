@@ -1,4 +1,5 @@
 import { PageWrapper } from "../components/PageWrapper";
+import { DailyWeather } from "../components/cityDetail/DailyWeather";
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
 import { Heading } from "../components/titles/Heading";
 import { HeadingLarge } from "../components/titles/HeadingLarge";
@@ -63,28 +64,14 @@ export const CityDetail = () => {
         <div className="flex space-x-5">
           <div className="flex space-x-5 w-3/5">
             {cityWeather?.data?.daily?.map((daily: any, index: number) => (
-              <div
-                className="w-32 py-5 bg-gray-50 shadow-sm flex flex-col space-y-2 items-center justify-center rounded-lg"
-                key={index}
-              >
-                <img
-                  src={
-                    WeatherIconsMap[
-                      daily?.weather[0]?.main?.toString()?.toLocaleLowerCase()
-                    ]
-                  }
-                  alt="cloudy"
-                  className="w-14 h-w-14"
-                />
-                <Heading
-                  text={getDay(daily?.dt)?.toString()!}
-                  colorTheme={COLORS.ThemeBlack}
-                />
-                <Heading
-                  text={convertToCelcius(daily?.temp?.day)?.toString()}
-                  colorTheme={COLORS.ThemeBlack}
-                />
-              </div>
+              <DailyWeather
+                weatherCondition={daily?.weather[0]?.main
+                  ?.toString()
+                  ?.toLocaleLowerCase()}
+                index={index}
+                day={getDay(daily?.dt)?.toString()!}
+                temperature={convertToCelcius(daily?.temp?.day)?.toString()}
+              />
             ))}
           </div>
           <div className="w-2/5 ">
