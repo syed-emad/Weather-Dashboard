@@ -14,9 +14,7 @@ export const CurrentWeather = ({ time, date, weather }: Props) => {
           <img src={WeatherIconsMap["clouds"]} alt="cloudy" className="w-14" />
           <HeadingLarge text={weather} />
         </div>
-        <div>
-          <p>something</p>
-        </div>
+
         <div>
           <HeadingLarge text={time} />
           <Paragraph text={date} />
