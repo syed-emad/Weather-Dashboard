@@ -15,7 +15,7 @@ export const DailyWeather = ({
 }: Props) => {
   return (
     <div
-      className="w-32 py-5 bg-gray-50 shadow-sm flex flex-col space-y-2 items-center justify-center rounded-lg"
+      className="w-32 py-5 bg-white shadow-sm flex flex-col space-y-2 items-center justify-center rounded-lg"
       key={index}
     >
       <img

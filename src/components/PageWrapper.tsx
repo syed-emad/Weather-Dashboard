@@ -1,6 +1,8 @@
 import React from "react";
 import { useIsOnline } from "../util/useIsOnline";
 import { Notification } from "./Notification";
+import Footer from "./Footer";
+import { Header } from "./Header";
 interface Props {
   children: React.ReactNode;
 }
@@ -8,8 +10,13 @@ export const PageWrapper = ({ children }: Props) => {
   const isOnline = useIsOnline();
   return (
     <>
-      <div className={"h-screen overflow-x-hidden flex flex-col bg-[#F0F5FF]"}>
-        <div className={"flex-grow px-5 mt-5"}>
+      <div
+        className={
+          "h-screen overflow-x-hidden flex flex-col bg-blue-50 bg-opacity-50"
+        }
+      >
+        <Header />
+        <div className={"flex-grow px-8  mt-5"}>
           {children}
           {
             <Notification
@@ -19,6 +26,7 @@ export const PageWrapper = ({ children }: Props) => {
             />
           }
         </div>
+        <Footer />
       </div>
     </>
   );

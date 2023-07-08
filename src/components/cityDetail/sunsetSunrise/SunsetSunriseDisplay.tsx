@@ -1,5 +1,3 @@
-import React from "react";
-import { getTime } from "../../util/Helpers";
 import { SunsetSunrise } from "./SunsetSunrise";
 import { SunsetSunriseSkeleton } from "./SunsetSunriseSkeleton";
 interface Props {

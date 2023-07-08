@@ -1,7 +1,7 @@
-import { IMAGES } from "../../constants";
-import { COLORS } from "../../constants/Colors";
-import { HeadingLarge } from "../titles/HeadingLarge";
-import { Paragraph } from "../titles/Paragraph";
+import { IMAGES } from "../../../constants";
+import { COLORS } from "../../../constants/Colors";
+import { HeadingLarge } from "../../titles/HeadingLarge";
+import { Paragraph } from "../../titles/Paragraph";
 interface Props {
   sunsetTime: string;
   sunriseTime: string;

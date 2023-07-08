@@ -5,7 +5,7 @@ export const WeatherIconsMap: {
 } = {
   clouds: IMAGES.weather_cloudy,
   rain: IMAGES.weather_rain,
-  clear: IMAGES.no_records,
+  clear: IMAGES.clear,
   default: IMAGES.weather_cloudy,
 };
 

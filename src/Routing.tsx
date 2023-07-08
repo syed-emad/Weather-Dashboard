@@ -24,6 +24,10 @@ const RouteList: Array<RouteType> = [
     component: <Cities />,
   },
   {
+    path: "/cities",
+    component: <Cities />,
+  },
+  {
     path: "/city/detail",
     component: <CityDetail />,
   },

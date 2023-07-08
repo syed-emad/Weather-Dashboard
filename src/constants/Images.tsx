@@ -5,4 +5,7 @@ export const IMAGES = {
   sunset: require("../assets/moon.png"),
   no_records: require("../assets/empty-folder.png"),
   wind: require("../assets/wind.png"),
+  clear: require("../assets/clear.png"),
+  apollo_logo: require("../assets/apollo-logo.png"),
+  main_logo: require("../assets/main-logo.png"),
 };

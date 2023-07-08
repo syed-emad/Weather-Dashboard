@@ -1,5 +1,5 @@
 import { PageWrapper } from "../components/PageWrapper";
-import { SunsetSunriseDisplay } from "../components/cityDetail/SunsetSunriseDisplay";
+
 import { AirQualityIndex } from "../components/cityDetail/airQuality/AirQualityIndex";
 import { DailyWeatherDisplay } from "../components/cityDetail/dailyWeather/DailyWeatherDisplay";
 import { Heading } from "../components/titles/Heading";
@@ -9,6 +9,7 @@ import { IAirQualityData } from "../states/redux-store/storeTypes";
 import { convertToCelcius, getFormattedDate, getTime } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
 import { CurrentWeatherDisplay } from "../components/cityDetail/currentWeather/CurrentWeatherDisplay";
+import { SunsetSunriseDisplay } from "../components/cityDetail/sunsetSunrise/SunsetSunriseDisplay";
 
 export const CityDetail = () => {
   const { getQueryParam } = useQueryParam();
