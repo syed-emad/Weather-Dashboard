@@ -1,5 +1,6 @@
 import { PageWrapper } from "../components/PageWrapper";
 import { CurrentWeather } from "../components/cityDetail/CurrentWeather";
+import { CurrentWeatherSkeleton } from "../components/cityDetail/CurrentWeatherSkeleton";
 import { DailyWeather } from "../components/cityDetail/DailyWeather";
 import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkeleton";
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
@@ -35,17 +36,25 @@ export const CityDetail = () => {
   return (
     <>
       <PageWrapper>
-        <div className="flex mb-10 items-center justify-between bg-white px-8 py-5 rounded-xl">
-          <CurrentWeather
-            time={getTime(cityWeather?.data?.current?.dt)}
-            date={getFormattedDate(cityWeather?.data?.current?.dt)}
-            weather={
-              convertToCelcius(cityWeather?.data.current?.temp)?.toString() +
-              "C"
-            }
-          />
+        {isLoading ? (
+          <>
+            <CurrentWeather
+              time={getTime(cityWeather?.data?.current?.dt)}
+              date={getFormattedDate(cityWeather?.data?.current?.dt)}
+              weather={
+                convertToCelcius(cityWeather?.data.current?.temp)?.toString() +
+                "C"
+              }
+            />
+          </>
+        ) : (
+          <>
+            <CurrentWeatherSkeleton />
+          </>
+        )}
+        <div className="mb-2">
+          <Heading text="Daily Forcast" />
         </div>
-        <Heading text="Daily Forcast" />
         <div className="flex space-x-5">
           <div className="flex space-x-5 w-3/5">
             {isLoading ? (
