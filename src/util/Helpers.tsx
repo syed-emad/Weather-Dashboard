@@ -1,25 +1,4 @@
 import { DateTime } from "luxon";
-let debounceTimeout: any;
-let lastButtonClickTime = 0;
-export const debounce2 = (callback: any, delay: number) => {
-  const now = Date.now();
-  const timeSinceLastClick = now - lastButtonClickTime;
-  lastButtonClickTime = now;
-  if (debounceTimeout) {
-    clearTimeout(debounceTimeout);
-  }
-  console.log("asd", timeSinceLastClick);
-  if (timeSinceLastClick > 1000) {
-    console.log("calling callback directly");
-    callback();
-  } else {
-    debounceTimeout = setTimeout(() => {
-      console.log("calling callback wth time out", delay);
-      callback();
-      debounceTimeout = null;
-    }, delay);
-  }
-};
 
 export const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
