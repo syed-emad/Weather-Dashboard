@@ -1,5 +1,6 @@
 import { PageWrapper } from "../components/PageWrapper";
 import { DailyWeather } from "../components/cityDetail/DailyWeather";
+import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkeleton";
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
 import { Heading } from "../components/titles/Heading";
 import { HeadingLarge } from "../components/titles/HeadingLarge";
@@ -63,18 +64,27 @@ export const CityDetail = () => {
         <Heading text="Daily Forcast" />
         <div className="flex space-x-5">
           <div className="flex space-x-5 w-3/5">
-            {cityWeather?.data?.daily?.map((daily: any, index: number) => (
-              <DailyWeather
-                weatherCondition={daily?.weather[0]?.main
-                  ?.toString()
-                  ?.toLocaleLowerCase()}
-                index={index}
-                day={getDay(daily?.dt)?.toString()!}
-                temperature={convertToCelcius(daily?.temp?.day)?.toString()}
-              />
-            ))}
+            {!isLoading ? (
+              <>
+                {cityWeather?.data?.daily?.map((daily: any, index: number) => (
+                  <DailyWeather
+                    weatherCondition={daily?.weather[0]?.main
+                      ?.toString()
+                      ?.toLocaleLowerCase()}
+                    index={index}
+                    day={getDay(daily?.dt)?.toString()!}
+                    temperature={convertToCelcius(daily?.temp?.day)?.toString()}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                <DailyWeatherSkeleton />
+              </>
+            )}
           </div>
-          <div className="w-2/5 ">
+
+          <div className="w-2/5">
             <SunsetSunrise
               sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
               sunsetTime={getTime(cityWeather?.data?.current?.sunset)}
