@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { ICitiesFilter } from "../util/Types";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
+import { Notification } from "../components/Notification";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -65,9 +66,12 @@ export const Cities = () => {
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
       /> */}
-      {currentNotification?.show && (
+      {true && (
         <>
-          <p>{currentNotification?.message}</p>
+          <Notification
+            code={currentNotification?.error}
+            message={currentNotification?.message}
+          />
         </>
       )}
     </PageWrapper>
