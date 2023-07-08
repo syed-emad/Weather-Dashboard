@@ -44,11 +44,11 @@ export const CityDetail = () => {
           <div className="current-weather">
             {!isLoadingWeather ? (
               <CurrentWeather
-                time={getTime(cityWeather?.data?.current?.dt)}
-                date={getFormattedDate(cityWeather?.data?.current?.dt)}
+                time={getTime(cityWeather?.data?.current?.dt ?? 0)}
+                date={getFormattedDate(cityWeather?.data?.current?.dt ?? 0)}
                 weather={
                   convertToCelcius(
-                    cityWeather?.data.current?.temp
+                    cityWeather?.data.current?.temp ?? 0
                   )?.toString() + "C"
                 }
               />
@@ -90,8 +90,12 @@ export const CityDetail = () => {
                 {!isLoadingWeather ? (
                   <>
                     <SunsetSunrise
-                      sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
-                      sunsetTime={getTime(cityWeather?.data?.current?.sunset)}
+                      sunriseTime={getTime(
+                        cityWeather?.data?.current?.sunrise ?? 0
+                      )}
+                      sunsetTime={getTime(
+                        cityWeather?.data?.current?.sunset ?? 0
+                      )}
                     />
                   </>
                 ) : (

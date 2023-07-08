@@ -6,7 +6,7 @@ export const getCityWeatherDetail = (
   exclude: string,
   appId: string
 ) => {
-  return openWeatherApi.get("/data/3.0//onecall", {
+  return openWeatherApi.get("/data/3.0/onecall", {
     params: { lat, lon, appId, exclude },
   });
 };

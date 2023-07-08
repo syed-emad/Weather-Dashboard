@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { getCityWeatherDetail } from "../redux-store/serivce/CitiesService";
+import { ICityWeather } from "../redux-store/storeTypes";
 
 export const useGetCityDetail = (
   long: number,
@@ -11,9 +12,8 @@ export const useGetCityDetail = (
     [`getQuestion-${long + lat}`],
     () => getCityWeatherDetail(long, lat, exclude, appId),
     {
-      // enabled: false,
       refetchOnWindowFocus: false,
-      onSuccess: async (response: any) => {
+      onSuccess: async (response: ICityWeather) => {
         return response.data;
       },
       onError: async (err: any) => {
