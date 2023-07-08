@@ -71,6 +71,7 @@ export const Cities = () => {
           <Notification
             code={currentNotification?.error}
             message={currentNotification?.message}
+            show={currentNotification?.show}
           />
         </>
       )}

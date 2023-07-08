@@ -4,7 +4,7 @@ import { HeadingLarge } from "../components/titles/HeadingLarge";
 import { Paragraph } from "../components/titles/Paragraph";
 import { IMAGES } from "../constants";
 import { COLORS } from "../constants/Colors";
-import { WeatherIconsMap } from "../constants/WeatherIconMappings";
+import { WeatherIconsMap } from "../constants/ImageIconMappings";
 import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
 import {
   convertToCelcius,

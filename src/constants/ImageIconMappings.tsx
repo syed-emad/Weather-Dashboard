@@ -6,3 +6,8 @@ export const WeatherIconsMap: any = {
   clear: IMAGES.no_records,
   default: IMAGES.weather_cloudy,
 };
+
+export const ResponseCodeToIconMap: any = {
+  401: IMAGES.no_records,
+  200: IMAGES.no_records,
+};
