@@ -13,23 +13,24 @@ import debounce from "lodash.debounce";
 import { ICitiesFilter } from "../util/Types";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
 import { Notification } from "../components/Notification";
+import { useIsOnline } from "../util/useIsOnline";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const isOnline = useIsOnline();
 
-  useEffect(() => {
-    const handleOnlineChange = () => {
-      setIsOnline(navigator.onLine);
-    };
-    window.addEventListener("online", handleOnlineChange);
-    window.addEventListener("offline", handleOnlineChange);
+  // useEffect(() => {
+  //   const handleOnlineChange = () => {
+  //     setIsOnline(navigator.onLine);
+  //   };
+  //   window.addEventListener("online", handleOnlineChange);
+  //   window.addEventListener("offline", handleOnlineChange);
 
-    return () => {
-      window.removeEventListener("online", handleOnlineChange);
-      window.removeEventListener("offline", handleOnlineChange);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("online", handleOnlineChange);
+  //     window.removeEventListener("offline", handleOnlineChange);
+  //   };
+  // }, []);
 
   const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
   const citiesDetails: any = useSelector(ListOfCities);
@@ -37,7 +38,7 @@ export const Cities = () => {
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log("search", search);
+  console.log("isOnline", isOnline);
   const currentNotification = useSelector(CurrentNotification);
   useEffect(() => {
     const fetchCountries = async () => {
