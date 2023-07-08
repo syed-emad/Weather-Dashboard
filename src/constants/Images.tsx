@@ -8,4 +8,5 @@ export const IMAGES = {
   clear: require("../assets/clear.png"),
   apollo_logo: require("../assets/apollo-logo.png"),
   main_logo: require("../assets/main-logo.png"),
+  banner: require("../assets/banner.png"),
 };
