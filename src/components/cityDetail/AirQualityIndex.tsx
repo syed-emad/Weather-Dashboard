@@ -11,7 +11,6 @@ import {
   AirQualitySuggestion,
   AirQualityValue,
 } from "../../constants/TextMapping";
-import { DailyWeatherSkeleton } from "./DailyWeatherSkeleton";
 import { AirQualitySkeleton } from "./AirQualitySkeleton";
 interface Props {
   data: Array<IAirQualityListDetails>;
