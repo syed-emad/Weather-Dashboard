@@ -28,7 +28,7 @@ export const Filter = ({ search, setSearch }: Props) => {
   };
   console.log("heeelo", search);
   return (
-    <div className="flex space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md ">
+    <div className="flex items-center space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md ">
       <div className="w-3/6">
         <Heading text="Search" />
         <TextBox
@@ -46,7 +46,7 @@ export const Filter = ({ search, setSearch }: Props) => {
           onChange={handleInputChange}
         />
       </div>
-      <div className="w-1/6 mt-8">
+      <div className="w-1/6 mt-6">
         <button
           className={classNames(
             "flex justify-center py-2 px-4 w-full h-10 border border-transparent rounded-md shadow-sm text-sm font-medium text-white   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500",
