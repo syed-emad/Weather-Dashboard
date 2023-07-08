@@ -7,7 +7,7 @@ import { ICity } from "../../states/redux-store/storeTypes";
 interface Props {
   cities: Array<ICity>;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
+  hanldePageChange: (page: number) => void;
   totalPages: number;
   isLoading: boolean;
 }
@@ -16,7 +16,7 @@ const headings = ["City", "Country", "Region", "Population"];
 export const CitiesTable = ({
   cities,
   currentPage,
-  setCurrentPage,
+  hanldePageChange,
   totalPages,
   isLoading,
 }: Props) => {
@@ -24,7 +24,7 @@ export const CitiesTable = ({
 
   const handlePageChange = (page: { selected: number }) => {
     var selectedPage = page?.selected;
-    setCurrentPage(selectedPage);
+    hanldePageChange(selectedPage);
   };
 
   const handleRowClick = (long: number, lat: number) => {

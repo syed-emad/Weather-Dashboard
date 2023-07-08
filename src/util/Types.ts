@@ -6,6 +6,7 @@ export interface IDropDown {
 export interface ICitiesFilter {
   country: string;
   searchText: string;
+  currentPage: number;
 }
 
 export interface INotification {

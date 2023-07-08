@@ -19,13 +19,17 @@ export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { getQueryParam } = useQueryParam();
   const searchParam = getQueryParam("search");
+  const countryParam = getQueryParam("country");
+  const currentPage = getQueryParam("currentPage");
   const [search, setSearch] = useState<ICitiesFilter>({
     searchText: searchParam ?? "",
+    country: countryParam ?? "",
+    currentPage: currentPage ?? 0,
   } as ICitiesFilter);
   const citiesDetails: ICityData = useSelector(ListOfCities);
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
-  const [curentPage, setCurrentPage] = useState(0);
+  // const [curentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const currentNotification = useSelector(CurrentNotification);
@@ -39,17 +43,16 @@ export const Cities = () => {
           GetCitiesLocation({
             namePrefix: event?.searchText,
             countryIds: event?.country,
-            offset: curentPage * 10,
+            offset: event?.currentPage * 10,
             limit: 10,
           })
         );
         setIsLoading(false);
       }, 1000),
-    [curentPage, dispatch]
+    [dispatch]
   );
 
-  const changeHandler = (event: ICitiesFilter) => {
-    console.log("i am here", event);
+  const handleSearchChange = (event: ICitiesFilter) => {
     appendSearchToUrl(event);
     setSearch(event);
     fethCities(event);
@@ -57,21 +60,34 @@ export const Cities = () => {
 
   const appendSearchToUrl = (event: ICitiesFilter) => {
     const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append("search", event.searchText);
+    urlSearchParams.append("search", event?.searchText);
+    urlSearchParams.append("country", event?.country);
+    urlSearchParams.append("pg", event?.currentPage?.toString());
     const newURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
     console.log("newURL", newURL);
     window.history.pushState(null, "", newURL);
+  };
+  // const appendToUrl = (key: string, value: string) => {
+  //   const urlSearchParams = new URLSearchParams(window.location.search);
+  //   urlSearchParams.append(key, value);
+  //   const newURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
+  //   console.log("newURL", newURL);
+  //   window.history.pushState(null, "", newURL);
+  // };
+  const hanldePageChange = (page: number) => {
+    appendSearchToUrl({ ...search, currentPage: page });
+    fethCities({ ...search, currentPage: page });
   };
   const handleClearSearch = async () => {
     setSearch((prevState: ICitiesFilter) => {
       return { ...prevState, searchText: "", country: "" };
     });
-    appendSearchToUrl({ searchText: "", country: "" });
+    appendSearchToUrl({ searchText: "", country: "", currentPage: 0 });
     await dispatch(
       GetCitiesLocation({
         namePrefix: "",
         countryIds: "",
-        offset: curentPage * 10,
+        offset: 0,
         limit: 10,
       })
     );
@@ -86,14 +102,13 @@ export const Cities = () => {
     <PageWrapper>
       <Filter
         search={search}
-        handleSearch={changeHandler}
-        setSearch={setSearch}
+        handleSearch={handleSearchChange}
         clearSearch={handleClearSearch}
       />
       <CitiesTable
         cities={cities}
-        currentPage={curentPage}
-        setCurrentPage={setCurrentPage}
+        currentPage={search?.currentPage}
+        hanldePageChange={hanldePageChange}
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
       />

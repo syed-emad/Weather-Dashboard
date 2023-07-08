@@ -9,13 +9,12 @@ import { classNames } from "../../util/Helpers";
 interface Props {
   search: ICitiesFilter;
   handleSearch: (prevState: ICitiesFilter) => void;
-  setSearch: (value: (prevState: ICitiesFilter) => ICitiesFilter) => void;
   clearSearch: () => void;
 }
 export const Filter = ({
   search,
   handleSearch,
-  setSearch,
+
   clearSearch,
 }: Props) => {
   const CountriesList: Array<IDropDown> = useSelector(ListOfCountries);
@@ -31,10 +30,6 @@ export const Filter = ({
 
   const cleatFilter = () => {
     clearSearch();
-    // setSearch((prevState: ICitiesFilter) => {
-    //   return { ...prevState, searchText: "", country: "" };
-    // });
-    // handleSearch({} as ICitiesFilter);
   };
   console.log("heeelo", search);
   return (
