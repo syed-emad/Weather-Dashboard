@@ -40,7 +40,7 @@ export const Cities = () => {
       await dispatch(
         GetCitiesLocation({
           namePrefix: search?.searchText,
-          countryIds: "abc",
+          countryIds: search?.country,
           offset: curentPage * 10,
           limit: 10,
         })

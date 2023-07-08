@@ -14,11 +14,9 @@ export interface IRejectValue {
   request?: any;
 }
 
-export interface Testing {
-  error: IRapidAPIRejectValue;
-}
 export interface IRapidAPIRejectValue {
-  errors: Array<IRapidApIErrorObj>;
+  errors?: Array<IRapidApIErrorObj>;
+  message?: string;
 }
 
 export interface IRapidApIErrorObj {

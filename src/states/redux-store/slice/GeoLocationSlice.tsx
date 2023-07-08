@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IRapidAPIRejectValue, IThunk, Testing } from "../storeTypes";
+import { IRapidAPIRejectValue, IThunk } from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
 import { IDropDown, INotification } from "../../../util/Types";
@@ -14,6 +14,24 @@ const initialState: GeoLocationState = {
   countries: {} as Array<IDropDown>,
 };
 
+const getMessageFromErrorResponse = (responseData: IRapidAPIRejectValue) => {
+  //Not Efficient
+  //geo location api returns different objects on error
+  //so its difficult to define fixed types
+  //2 most common error cases handled
+  let message = "";
+
+  if (responseData?.message != null) {
+    message = responseData.message;
+  }
+  if (
+    responseData?.errors?.length != null &&
+    responseData?.errors?.length > 0
+  ) {
+    message = responseData?.errors[0].message;
+  }
+  return message;
+};
 export const GetCitiesLocation = createAsyncThunk<
   any,
   { countryIds?: string; namePrefix?: string; limit?: number; offset?: number },
@@ -35,13 +53,21 @@ export const GetCitiesLocation = createAsyncThunk<
     } catch (err: AxiosError | unknown) {
       let error: AxiosError<IRapidAPIRejectValue> =
         err as AxiosError<IRapidAPIRejectValue>;
+
+      let responseData = error?.response?.data;
+      let message = "";
+      if (responseData === undefined) {
+        message = "some error";
+      } else {
+        message = getMessageFromErrorResponse(responseData);
+      }
+
       let notification: INotification = {
         error: error.response?.status ?? 401,
-        message:
-          error.response?.data.errors[0].message.toString() ??
-          "Some Error Occured",
+        message: message ?? "Some Error Occured",
         show: true,
       };
+
       dispatch(ShowNotification({ notification }));
       if (!error.response) throw err;
       return rejectWithValue(error.response);

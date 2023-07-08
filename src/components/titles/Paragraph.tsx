@@ -8,7 +8,7 @@ export const Paragraph = ({ colorTheme, text }: Props) => {
   return (
     <p
       className={classNames(
-        "font-semibold ",
+        "font-normal ",
         colorTheme ? colorTheme : "text-gray-700"
       )}
     >
