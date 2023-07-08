@@ -10,17 +10,18 @@ import {
 } from "../states/redux-store/slice/GeoLocationSlice";
 import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
+import { ICitiesFilter } from "../util/Types";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
   const citiesDetails: any = useSelector(ListOfCities);
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log(citiesDetails, search, curentPage);
+  console.log("search", search);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -33,10 +34,12 @@ export const Cities = () => {
   useEffect(() => {
     setIsLoading(true);
     const handleInputChangeDebounced = debounce(async () => {
-      // setIsLoading(true);
+      setIsLoading(true);
+      console.log(search, "search222");
       await dispatch(
         GetCitiesLocation({
-          namePrefix: search,
+          namePrefix: search?.searchText,
+          countryIds: search?.country,
           offset: curentPage * 10,
           limit: 10,
         })

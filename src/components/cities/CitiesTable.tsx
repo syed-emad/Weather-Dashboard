@@ -31,6 +31,8 @@ export const CitiesTable = ({
   const handleRowClick = (long: number, lat: number) => {
     navigate(`/city/detail?long=${long}&lat=${lat}`);
   };
+
+  console.log("testing", cities);
   return (
     <div className="w-full">
       <div className="overflow-hidden shadow rounded-lg bg-pink-100 ">
@@ -51,15 +53,7 @@ export const CitiesTable = ({
           <tbody className="divide-y divide-gray-100 bg-white">
             {!isLoading ? (
               <>
-                {cities?.length === 0 ? (
-                  <>
-                    <tr>
-                      <td colSpan={4} className="py-20 text-center ">
-                        <NoTableRecords />
-                      </td>
-                    </tr>
-                  </>
-                ) : (
+                {cities?.length > 0 ? (
                   <>
                     {cities?.length > 0 &&
                       cities?.map((city: any, index: number) => (
@@ -78,6 +72,14 @@ export const CitiesTable = ({
                           <td>{city.population}</td>
                         </tr>
                       ))}
+                  </>
+                ) : (
+                  <>
+                    <tr>
+                      <td colSpan={4} className="py-20 text-center ">
+                        <NoTableRecords />
+                      </td>
+                    </tr>
                   </>
                 )}
               </>

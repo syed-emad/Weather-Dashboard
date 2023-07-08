@@ -2,13 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IThunk } from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
+import { IDropDown } from "../../../util/Types";
 interface GeoLocationState {
   cities: Array<any>;
-  countries: Array<any>;
+  countries: Array<IDropDown>;
 }
 const initialState: GeoLocationState = {
   cities: {} as Array<any>,
-  countries: {} as Array<any>,
+  countries: {} as Array<IDropDown>,
 };
 
 export const GetCitiesLocation = createAsyncThunk<
