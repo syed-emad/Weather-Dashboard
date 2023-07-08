@@ -1,8 +1,6 @@
 import { PageWrapper } from "../components/PageWrapper";
-import { CurrentWeather } from "../components/cityDetail/currentWeather/CurrentWeather";
 import { SunsetSunriseDisplay } from "../components/cityDetail/SunsetSunriseDisplay";
 import { AirQualityIndex } from "../components/cityDetail/airQuality/AirQualityIndex";
-import { CurrentWeatherSkeleton } from "../components/cityDetail/currentWeather/CurrentWeatherSkeleton";
 import { DailyWeatherDisplay } from "../components/cityDetail/dailyWeather/DailyWeatherDisplay";
 import { Heading } from "../components/titles/Heading";
 import { useGetCityAirQuality } from "../states/react-query/useGetCityAirQuality";
@@ -10,6 +8,7 @@ import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
 import { IAirQualityData } from "../states/redux-store/storeTypes";
 import { convertToCelcius, getFormattedDate, getTime } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
+import { CurrentWeatherDisplay } from "../components/cityDetail/currentWeather/CurrentWeatherDisplay";
 
 export const CityDetail = () => {
   const { getQueryParam } = useQueryParam();
@@ -35,19 +34,16 @@ export const CityDetail = () => {
       <PageWrapper>
         <div className="space-y-5">
           <div className="current-weather">
-            {!isLoadingWeather ? (
-              <CurrentWeather
-                time={getTime(cityWeather?.data?.current?.dt ?? 0)}
-                date={getFormattedDate(cityWeather?.data?.current?.dt ?? 0)}
-                weather={
-                  convertToCelcius(
-                    cityWeather?.data.current?.temp ?? 0
-                  )?.toString() + "C"
-                }
-              />
-            ) : (
-              <CurrentWeatherSkeleton />
-            )}
+            <CurrentWeatherDisplay
+              isLoading={isLoadingWeather}
+              time={getTime(cityWeather?.data?.current?.dt ?? 0)}
+              date={getFormattedDate(cityWeather?.data?.current?.dt ?? 0)}
+              weather={
+                convertToCelcius(
+                  cityWeather?.data.current?.temp ?? 0
+                )?.toString() + "C"
+              }
+            />
           </div>
           <div id="daily-forcast">
             <div className="mb-2">
