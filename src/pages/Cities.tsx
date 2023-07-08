@@ -17,20 +17,6 @@ import { useIsOnline } from "../util/useIsOnline";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const isOnline = useIsOnline();
-
-  // useEffect(() => {
-  //   const handleOnlineChange = () => {
-  //     setIsOnline(navigator.onLine);
-  //   };
-  //   window.addEventListener("online", handleOnlineChange);
-  //   window.addEventListener("offline", handleOnlineChange);
-
-  //   return () => {
-  //     window.removeEventListener("online", handleOnlineChange);
-  //     window.removeEventListener("offline", handleOnlineChange);
-  //   };
-  // }, []);
 
   const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
   const citiesDetails: any = useSelector(ListOfCities);
@@ -38,7 +24,7 @@ export const Cities = () => {
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log("isOnline", isOnline);
+
   const currentNotification = useSelector(CurrentNotification);
   useEffect(() => {
     const fetchCountries = async () => {

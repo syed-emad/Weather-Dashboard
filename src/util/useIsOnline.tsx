@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useIsOnline = () => {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   useEffect(() => {
     const handleOnlineChange = () => {
       setIsOnline(navigator.onLine);
@@ -14,5 +14,5 @@ export const useIsOnline = () => {
       window.removeEventListener("offline", handleOnlineChange);
     };
   }, []);
-  return { isOnline };
+  return isOnline;
 };
