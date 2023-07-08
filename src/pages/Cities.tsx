@@ -24,6 +24,11 @@ export const Cities = () => {
     };
     window.addEventListener("online", handleOnlineChange);
     window.addEventListener("offline", handleOnlineChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineChange);
+      window.removeEventListener("offline", handleOnlineChange);
+    };
   }, []);
 
   const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
