@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { INotification } from "../../../util/Types";
-import { Root } from "react-dom/client";
 import { RootState } from "../store";
-import { getCountriesList } from "../serivce/GeoLocationService";
 import { IThunk } from "../storeTypes";
 
 interface NotificateionState {
