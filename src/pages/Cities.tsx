@@ -16,6 +16,15 @@ import { Notification } from "../components/Notification";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+    window.addEventListener("online", handleOnlineChange);
+    window.addEventListener("offline", handleOnlineChange);
+  }, []);
 
   const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
   const citiesDetails: any = useSelector(ListOfCities);

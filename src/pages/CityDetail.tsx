@@ -6,9 +6,6 @@ import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkele
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
 import { SunsetSunriseSkeleton } from "../components/cityDetail/SunsetSunriseSkeleton";
 import { Heading } from "../components/titles/Heading";
-import { HeadingLarge } from "../components/titles/HeadingLarge";
-import { Paragraph } from "../components/titles/Paragraph";
-import { WeatherIconsMap } from "../constants/ImageIconMappings";
 import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
 import {
   convertToCelcius,
@@ -36,7 +33,7 @@ export const CityDetail = () => {
   return (
     <>
       <PageWrapper>
-        {isLoading ? (
+        {!isLoading ? (
           <>
             <CurrentWeather
               time={getTime(cityWeather?.data?.current?.dt)}
@@ -57,7 +54,7 @@ export const CityDetail = () => {
         </div>
         <div className="flex space-x-5">
           <div className="flex space-x-5 w-3/5">
-            {isLoading ? (
+            {!isLoading ? (
               <>
                 {cityWeather?.data?.daily?.map((daily: any, index: number) => (
                   <DailyWeather
@@ -78,7 +75,7 @@ export const CityDetail = () => {
           </div>
 
           <div className="w-2/5">
-            {isLoading ? (
+            {!isLoading ? (
               <>
                 <SunsetSunrise
                   sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
