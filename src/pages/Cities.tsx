@@ -13,7 +13,6 @@ import debounce from "lodash.debounce";
 import { ICitiesFilter } from "../util/Types";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
 import { Notification } from "../components/Notification";
-import { useIsOnline } from "../util/useIsOnline";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
