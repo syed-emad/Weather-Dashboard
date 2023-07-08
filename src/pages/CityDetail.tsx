@@ -1,7 +1,9 @@
 import { PageWrapper } from "../components/PageWrapper";
+import { CurrentWeather } from "../components/cityDetail/CurrentWeather";
 import { DailyWeather } from "../components/cityDetail/DailyWeather";
 import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkeleton";
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
+import { SunsetSunriseSkeleton } from "../components/cityDetail/SunsetSunriseSkeleton";
 import { Heading } from "../components/titles/Heading";
 import { HeadingLarge } from "../components/titles/HeadingLarge";
 import { Paragraph } from "../components/titles/Paragraph";
@@ -20,10 +22,8 @@ export const CityDetail = () => {
   const long = verifyCordinates(getQueryParam("long"));
   const lat = verifyCordinates(getQueryParam("lat"));
   const apiKey = process.env.REACT_APP_OPEN_WEATHER_KEY;
-  console.log(apiKey, "apiKey");
   const exclude = "hourly,minutely,alerts";
-  console.log("long", long);
-  console.log("lat", lat);
+
   const { data: cityWeather, isLoading } = useGetCityDetail(
     long,
     lat,
@@ -36,33 +36,19 @@ export const CityDetail = () => {
     <>
       <PageWrapper>
         <div className="flex mb-10 items-center justify-between bg-white px-8 py-5 rounded-xl">
-          <div className="flex space-x-2 items-center" key={1}>
-            <img
-              src={WeatherIconsMap["clouds"]}
-              alt="cloudy"
-              className="w-14 h-w-14"
-            />
-            <HeadingLarge
-              text={
-                convertToCelcius(cityWeather?.data.current?.temp)?.toString() +
-                "C"
-              }
-            />
-          </div>
-          <div>
-            <p>something</p>
-          </div>
-          <div className="">
-            <HeadingLarge text={getTime(cityWeather?.data?.current?.dt)} />
-            <Paragraph
-              text={getFormattedDate(cityWeather?.data?.current?.dt)}
-            />
-          </div>
+          <CurrentWeather
+            time={getTime(cityWeather?.data?.current?.dt)}
+            date={getFormattedDate(cityWeather?.data?.current?.dt)}
+            weather={
+              convertToCelcius(cityWeather?.data.current?.temp)?.toString() +
+              "C"
+            }
+          />
         </div>
         <Heading text="Daily Forcast" />
         <div className="flex space-x-5">
           <div className="flex space-x-5 w-3/5">
-            {!isLoading ? (
+            {isLoading ? (
               <>
                 {cityWeather?.data?.daily?.map((daily: any, index: number) => (
                   <DailyWeather
@@ -83,10 +69,18 @@ export const CityDetail = () => {
           </div>
 
           <div className="w-2/5">
-            <SunsetSunrise
-              sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
-              sunsetTime={getTime(cityWeather?.data?.current?.sunset)}
-            />
+            {isLoading ? (
+              <>
+                <SunsetSunrise
+                  sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
+                  sunsetTime={getTime(cityWeather?.data?.current?.sunset)}
+                />
+              </>
+            ) : (
+              <>
+                <SunsetSunriseSkeleton />
+              </>
+            )}
           </div>
         </div>
       </PageWrapper>
