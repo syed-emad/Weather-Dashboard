@@ -108,7 +108,7 @@ export const CityDetail = () => {
           </div>
           <div id="air-quality">
             <Heading text="Air Quality Index" />
-            <AirQualityIndex data={list} />
+            <AirQualityIndex data={list} isLoading={isLoadingAirQuality} />
           </div>
         </div>
       </PageWrapper>
