@@ -1,11 +1,16 @@
 import { Pagination } from "../Pagination";
 import { useNavigate } from "react-router-dom";
+import { CitiesTableSkeleton } from "./CitiesTableSkeleton";
+import { IMAGES } from "../../constants";
+import { Heading } from "../titles/Heading";
+import { NoTableRecords } from "./NoTableRecords";
 
 interface Props {
   cities: any;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   totalPages: number;
+  isLoading: boolean;
 }
 const headings = ["City", "Country", "Region", "Population"];
 
@@ -14,6 +19,7 @@ export const CitiesTable = ({
   currentPage,
   setCurrentPage,
   totalPages,
+  isLoading,
 }: Props) => {
   const navigate = useNavigate();
 
@@ -43,21 +49,41 @@ export const CitiesTable = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
-            {cities?.length &&
-              cities?.map((city: any, index: number) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-50"
-                  onClick={() => handleRowClick(city.longitude, city.latitude)}
-                >
-                  <td className="py-4 pl-4 text-sm text-gray-700">
-                    {city.name}
-                  </td>
-                  <td>{city.country}</td>
-                  <td>{city.region}</td>
-                  <td>{city.population}</td>
-                </tr>
-              ))}
+            {!isLoading ? (
+              <>
+                {cities?.length === 0 ? (
+                  <>
+                    <tr>
+                      <td colSpan={4} className="py-20 text-center ">
+                        <NoTableRecords />
+                      </td>
+                    </tr>
+                  </>
+                ) : (
+                  <>
+                    {cities?.length > 0 &&
+                      cities?.map((city: any, index: number) => (
+                        <tr
+                          key={index}
+                          className="hover:bg-gray-50"
+                          onClick={() =>
+                            handleRowClick(city.longitude, city.latitude)
+                          }
+                        >
+                          <td className="py-4 pl-4 text-sm text-gray-700">
+                            {city.name}
+                          </td>
+                          <td>{city.country}</td>
+                          <td>{city.region}</td>
+                          <td>{city.population}</td>
+                        </tr>
+                      ))}
+                  </>
+                )}
+              </>
+            ) : (
+              <CitiesTableSkeleton />
+            )}
           </tbody>
         </table>
         <div className="flex items-center justify-center py-3 bg-gray-50 sm:px-6">

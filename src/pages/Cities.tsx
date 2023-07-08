@@ -19,18 +19,21 @@ export const Cities = () => {
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   console.log(citiesDetails, search, curentPage);
 
-  const fetchCountries = async () => {
-    await dispatch(GetCountries({}));
-  };
-
   useEffect(() => {
+    const fetchCountries = async () => {
+      await dispatch(GetCountries({}));
+    };
     fetchCountries();
-  }, []);
+  }, [dispatch]);
 
+  console.log(isLoading, "isLoading");
   useEffect(() => {
+    setIsLoading(true);
     const handleInputChangeDebounced = debounce(async () => {
+      // setIsLoading(true);
       await dispatch(
         GetCitiesLocation({
           namePrefix: search,
@@ -38,13 +41,15 @@ export const Cities = () => {
           limit: 10,
         })
       );
+      setIsLoading(false);
     }, 1000);
 
     handleInputChangeDebounced();
+
     return () => {
       handleInputChangeDebounced.cancel();
     };
-  }, [search, curentPage]);
+  }, [search, curentPage, dispatch]);
   return (
     <PageWrapper>
       <Filter search={search} setSearch={setSearch} />
@@ -53,6 +58,7 @@ export const Cities = () => {
         currentPage={curentPage}
         setCurrentPage={setCurrentPage}
         totalPages={paginationData?.totalCount}
+        isLoading={isLoading}
       />
     </PageWrapper>
   );
