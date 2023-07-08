@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { IMAGES } from "../../constants";
 import { Heading } from "../titles/Heading";
 import { Paragraph } from "../titles/Paragraph";
 import { useNavigate } from "react-router-dom";
-import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import {
   GetCountries,
