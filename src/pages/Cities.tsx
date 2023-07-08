@@ -1,19 +1,19 @@
+import debounce from "lodash.debounce";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Notification } from "../components/Notification";
 import { PageWrapper } from "../components/PageWrapper";
 import { CitiesTable } from "../components/cities/CitiesTable";
 import { Filter } from "../components/cities/Filter";
-import { AppDispatch } from "../states/redux-store/store";
 import {
   GetCitiesLocation,
   GetCountries,
   ListOfCities,
 } from "../states/redux-store/slice/GeoLocationSlice";
-import { useEffect, useState } from "react";
-import debounce from "lodash.debounce";
-import { ICitiesFilter } from "../util/Types";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
-import { Notification } from "../components/Notification";
+import { AppDispatch } from "../states/redux-store/store";
 import { ICityData } from "../states/redux-store/storeTypes";
+import { ICitiesFilter } from "../util/Types";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,42 +23,42 @@ export const Cities = () => {
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const currentNotification = useSelector(CurrentNotification);
-  useEffect(() => {
-    const fetchCountries = async () => {
-      await dispatch(GetCountries({}));
-    };
-    fetchCountries();
-  }, [dispatch]);
+
+  const fethCities = useMemo(
+    () =>
+      debounce(async (event: ICitiesFilter) => {
+        setIsLoading(true);
+
+        await dispatch(
+          GetCitiesLocation({
+            namePrefix: event?.searchText,
+            countryIds: event?.country,
+            offset: curentPage * 10,
+            limit: 10,
+          })
+        );
+        setIsLoading(false);
+      }, 1000),
+    [curentPage, dispatch]
+  );
+
+  const changeHandler = (event: ICitiesFilter) => {
+    console.log("i am here", event);
+    setSearch(event);
+    fethCities(event);
+  };
 
   useEffect(() => {
-    setIsLoading(true);
-    const handleInputChangeDebounced = debounce(async () => {
-      setIsLoading(true);
-
-      await dispatch(
-        GetCitiesLocation({
-          namePrefix: search?.searchText,
-          countryIds: search?.country,
-          offset: curentPage * 10,
-          limit: 10,
-        })
-      );
-      setIsLoading(false);
-    }, 1000);
-
-    handleInputChangeDebounced();
-
     return () => {
-      handleInputChangeDebounced.cancel();
+      fethCities.cancel();
     };
-  }, [search, curentPage, dispatch]);
+  }, [fethCities]);
   return (
     <PageWrapper>
-      <Filter search={search} setSearch={setSearch} />
-
+      <Filter search={search} setSearch={changeHandler} />
       <CitiesTable
         cities={cities}
         currentPage={curentPage}
@@ -66,7 +66,6 @@ export const Cities = () => {
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
       />
-
       <Notification
         code={currentNotification?.error}
         message={currentNotification?.message}

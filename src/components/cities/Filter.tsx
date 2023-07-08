@@ -8,7 +8,7 @@ import { ICitiesFilter, IDropDown } from "../../util/Types";
 import { classNames } from "../../util/Helpers";
 interface Props {
   search: ICitiesFilter;
-  setSearch: (value: (prevState: ICitiesFilter) => ICitiesFilter) => void;
+  setSearch: (prevState: ICitiesFilter) => void;
 }
 export const Filter = ({ search, setSearch }: Props) => {
   const CountriesList: Array<IDropDown> = useSelector(ListOfCountries);
@@ -17,15 +17,13 @@ export const Filter = ({ search, setSearch }: Props) => {
     (key: string) =>
     (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
       let value = evt.target.value;
-      setSearch((prevState: ICitiesFilter) => {
-        return { ...prevState, [key]: value };
-      });
+      let result = { ...search, [key]: value };
+
+      setSearch(result);
     };
 
   const cleatFilter = () => {
-    setSearch((prevState: ICitiesFilter) => {
-      return { ...prevState, searchText: "", country: "" };
-    });
+    setSearch({} as ICitiesFilter);
   };
   console.log("heeelo", search);
   return (
@@ -33,7 +31,7 @@ export const Filter = ({ search, setSearch }: Props) => {
       <div className="w-3/6">
         <Heading text="Search" />
         <TextBox
-          value={search ? search.searchText : ""}
+          value={search.searchText}
           inputKey="searchText"
           onChange={handleInputChange}
         />
