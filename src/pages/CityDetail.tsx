@@ -15,7 +15,10 @@ import {
   getTime,
 } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
-import { IAirQualityData } from "../states/redux-store/storeTypes";
+import {
+  IAirQualityData,
+  IDailyWeather,
+} from "../states/redux-store/storeTypes";
 import { AirQualityIndex } from "../components/cityDetail/AirQualityIndex";
 
 export const CityDetail = () => {
@@ -65,7 +68,7 @@ export const CityDetail = () => {
                 {!isLoadingWeather ? (
                   <>
                     {cityWeather?.data?.daily?.map(
-                      (daily: any, index: number) => (
+                      (daily: IDailyWeather, index: number) => (
                         <DailyWeather
                           key={index}
                           weatherCondition={daily?.weather[0]?.main

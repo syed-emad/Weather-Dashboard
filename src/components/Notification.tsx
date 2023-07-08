@@ -9,7 +9,7 @@ interface Props {
   code: number;
   show: boolean;
 }
-export const Notification = ({ message, code, show }: Props) => {
+export const Notification = ({ message, code, show = false }: Props) => {
   return (
     <>
       <div

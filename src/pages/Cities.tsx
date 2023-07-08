@@ -13,12 +13,13 @@ import debounce from "lodash.debounce";
 import { ICitiesFilter } from "../util/Types";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
 import { Notification } from "../components/Notification";
+import { ICityData } from "../states/redux-store/storeTypes";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
-  const citiesDetails: any = useSelector(ListOfCities);
+  const citiesDetails: ICityData = useSelector(ListOfCities);
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
   const [curentPage, setCurrentPage] = useState(0);
@@ -69,7 +70,7 @@ export const Cities = () => {
       <Notification
         code={currentNotification?.error}
         message={currentNotification?.message}
-        show={currentNotification?.show}
+        show={currentNotification?.show ?? false}
       />
     </PageWrapper>
   );

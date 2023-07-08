@@ -4,9 +4,10 @@ import { CitiesTableSkeleton } from "./CitiesTableSkeleton";
 import { IMAGES } from "../../constants";
 import { Heading } from "../titles/Heading";
 import { NoTableRecords } from "./NoTableRecords";
+import { ICity } from "../../states/redux-store/storeTypes";
 
 interface Props {
-  cities: any;
+  cities: Array<ICity>;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   totalPages: number;
@@ -23,7 +24,7 @@ export const CitiesTable = ({
 }: Props) => {
   const navigate = useNavigate();
 
-  const handlePageChange = (page: any) => {
+  const handlePageChange = (page: { selected: number }) => {
     var selectedPage = page?.selected;
     setCurrentPage(selectedPage);
   };
@@ -56,7 +57,7 @@ export const CitiesTable = ({
                 {cities?.length > 0 ? (
                   <>
                     {cities?.length > 0 &&
-                      cities?.map((city: any, index: number) => (
+                      cities?.map((city: ICity, index: number) => (
                         <tr
                           key={index}
                           className="hover:bg-gray-50"

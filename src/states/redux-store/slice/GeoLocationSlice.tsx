@@ -1,16 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IRapidAPIRejectValue, IThunk } from "../storeTypes";
+import {
+  ICityData,
+  ICountry,
+  IRapidAPIRejectValue,
+  IThunk,
+} from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
 import { IDropDown, INotification } from "../../../util/Types";
 import { AxiosError } from "axios";
 import { ShowNotification } from "./NotificationSlice";
 interface GeoLocationState {
-  cities: Array<any>;
+  cities: ICityData;
   countries: Array<IDropDown>;
 }
 const initialState: GeoLocationState = {
-  cities: {} as Array<any>,
+  cities: {} as ICityData,
   countries: {} as Array<IDropDown>,
 };
 
@@ -33,7 +38,7 @@ const getMessageFromErrorResponse = (responseData: IRapidAPIRejectValue) => {
   return message;
 };
 export const GetCitiesLocation = createAsyncThunk<
-  any,
+  ICityData,
   { countryIds?: string; namePrefix?: string; limit?: number; offset?: number },
   IThunk
 >(
@@ -49,7 +54,7 @@ export const GetCitiesLocation = createAsyncThunk<
         limit,
         offset
       );
-      return response;
+      return response.data;
     } catch (err: AxiosError | unknown) {
       let error: AxiosError<IRapidAPIRejectValue> =
         err as AxiosError<IRapidAPIRejectValue>;
@@ -75,12 +80,12 @@ export const GetCitiesLocation = createAsyncThunk<
   }
 );
 
-export const GetCountries = createAsyncThunk<any, {}, IThunk>(
+export const GetCountries = createAsyncThunk<Array<ICountry>, {}, IThunk>(
   "/countries/all",
   async () => {
     try {
       const response = await getCountriesList();
-      return response;
+      return response.data;
     } catch (e) {}
   }
 );
@@ -92,12 +97,12 @@ const geoLocationSlice = createSlice({
     builder
       .addCase(GetCitiesLocation.fulfilled, (state, action) => {
         const { payload } = action;
-        state.cities = payload?.data;
+        state.cities = payload;
       })
       .addCase(GetCountries.fulfilled, (state, action) => {
         const { payload } = action;
-        const data = payload?.data;
-        const result = data?.map((country: any) => ({
+        const data = payload;
+        const result = data?.map((country: ICountry) => ({
           key: country?.cca2,
           value: country?.name?.common,
         }));

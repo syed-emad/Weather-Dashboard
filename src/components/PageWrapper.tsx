@@ -15,7 +15,7 @@ export const PageWrapper = ({ children }: Props) => {
             <Notification
               code={401}
               message={"You are offline"}
-              show={!isOnline}
+              show={!isOnline ?? false}
             />
           }
         </div>

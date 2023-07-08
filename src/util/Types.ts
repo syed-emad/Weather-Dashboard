@@ -1,5 +1,5 @@
 export interface IDropDown {
-  key: number;
+  key: string;
   value: string;
 }
 

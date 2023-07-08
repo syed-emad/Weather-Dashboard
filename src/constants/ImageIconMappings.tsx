@@ -1,13 +1,17 @@
 import { IMAGES } from "./Images";
 
-export const WeatherIconsMap: any = {
+export const WeatherIconsMap: {
+  [key: string]: string;
+} = {
   clouds: IMAGES.weather_cloudy,
   rain: IMAGES.weather_rain,
   clear: IMAGES.no_records,
   default: IMAGES.weather_cloudy,
 };
 
-export const ResponseCodeToIconMap: any = {
+export const ResponseCodeToIconMap: {
+  [key: number]: string;
+} = {
   401: IMAGES.no_records,
   200: IMAGES.no_records,
 };

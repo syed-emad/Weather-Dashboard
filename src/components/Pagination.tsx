@@ -3,7 +3,7 @@ interface Props {
   currentPage: number;
   totalPages: number;
   displayRange?: number;
-  onPageChange: (page: any) => void;
+  onPageChange: (page: { selected: number }) => void;
 }
 export const Pagination = ({
   currentPage,

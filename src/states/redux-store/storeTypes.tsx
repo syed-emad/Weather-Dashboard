@@ -8,11 +8,6 @@ export interface IThunk {
   rejectValue: AxiosResponse;
   dispatch: AppDispatch;
 }
-export interface IRejectValue {
-  message?: string;
-  code?: string;
-  request?: any;
-}
 
 export interface IRapidAPIRejectValue {
   errors?: Array<IRapidApIErrorObj>;
@@ -46,6 +41,7 @@ export interface IAirQualityListDetails {
 export interface IAirQualityMain {
   aqi: number;
 }
+
 export interface IAirQualityComponents {
   co: number;
   no: number;
@@ -57,7 +53,7 @@ export interface IAirQualityComponents {
   nh3: number;
 }
 
-interface IDailyWeather {
+export interface IDailyWeather {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -129,4 +125,46 @@ interface ICityWeatherData {
 
 export interface ICityWeather {
   data: ICityWeatherData;
+}
+
+export interface ICity {
+  id: number;
+  wikiDataId: string;
+  type: string;
+  city: string;
+  name: string;
+  country: string;
+  countryCode: string;
+  region: string;
+  regionCode: string;
+  regionWdId: string;
+  latitude: number;
+  longitude: number;
+  population: number;
+}
+
+export interface ICityData {
+  data: Array<ICity>;
+  links: {
+    rel: string;
+    href: string;
+  }[];
+  metadata: {
+    currentOffset: number;
+    totalCount: number;
+  };
+}
+
+export interface ICountry {
+  name: {
+    common: string;
+    official: string;
+    nativeName: {
+      [key: string]: {
+        official: string;
+        common: string;
+      };
+    };
+  };
+  cca2: string;
 }

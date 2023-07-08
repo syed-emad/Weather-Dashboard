@@ -8,10 +8,11 @@ import { ICitiesFilter, IDropDown } from "../../util/Types";
 import { classNames } from "../../util/Helpers";
 interface Props {
   search: ICitiesFilter;
-  setSearch: any;
+  setSearch: (value: (prevState: ICitiesFilter) => ICitiesFilter) => void;
 }
 export const Filter = ({ search, setSearch }: Props) => {
   const CountriesList: Array<IDropDown> = useSelector(ListOfCountries);
+
   const handleInputChange =
     (key: string) =>
     (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
