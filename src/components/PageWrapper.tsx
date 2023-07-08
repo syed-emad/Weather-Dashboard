@@ -6,7 +6,6 @@ interface Props {
 }
 export const PageWrapper = ({ children }: Props) => {
   const isOnline = useIsOnline();
-  console.log("isOnline", isOnline);
   return (
     <>
       <div className={"h-screen overflow-x-hidden flex flex-col bg-[#F0F5FF]"}>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { PageWrapper } from "../components/PageWrapper";
 import { AirQualityStat } from "../components/cityDetail/AirQualityStat";
 import { CurrentWeather } from "../components/cityDetail/CurrentWeather";
@@ -10,6 +11,7 @@ import { Heading } from "../components/titles/Heading";
 import { Paragraph } from "../components/titles/Paragraph";
 import { IMAGES } from "../constants";
 import { COLORS } from "../constants/Colors";
+import { useGetCityAirQuality } from "../states/react-query/useGetCityAirQuality";
 import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
 import {
   convertToCelcius,
@@ -18,6 +20,12 @@ import {
   getTime,
 } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
+import {
+  IAirQuality,
+  IAirQualityData,
+  IAirQualityListDetails,
+} from "../states/redux-store/storeTypes";
+import { AirQualityIndex } from "../components/cityDetail/AirQualityIndex";
 
 export const CityDetail = () => {
   const { getQueryParam } = useQueryParam();
@@ -26,20 +34,26 @@ export const CityDetail = () => {
   const apiKey = process.env.REACT_APP_OPEN_WEATHER_KEY;
   const exclude = "hourly,minutely,alerts";
 
-  const { data: cityWeather, isLoading } = useGetCityDetail(
+  const { data: cityWeather, isLoading: isLoadingWeather } = useGetCityDetail(
     long,
     lat,
     exclude,
     apiKey ?? ""
   );
 
-  console.log("asd", cityWeather);
+  const { data: cityAirPollution, isLoading: isLoadingAirQuality } =
+    useGetCityAirQuality(long, lat, apiKey ?? "");
+
+  const { list } = cityAirPollution?.data || ({} as IAirQualityData);
+  // const {
+  //   list: [{ main = {}, components: IAirQualityComponents = {} } = {}] = [],
+  // } = cityAirPollution?.data || {};
   return (
     <>
       <PageWrapper>
         <div className="space-y-5">
           <div className="current-weather">
-            {!isLoading ? (
+            {!isLoadingWeather ? (
               <CurrentWeather
                 time={getTime(cityWeather?.data?.current?.dt)}
                 date={getFormattedDate(cityWeather?.data?.current?.dt)}
@@ -59,11 +73,12 @@ export const CityDetail = () => {
             </div>
             <div className="flex space-x-5">
               <div className="flex space-x-5 w-3/5">
-                {!isLoading ? (
+                {!isLoadingWeather ? (
                   <>
                     {cityWeather?.data?.daily?.map(
                       (daily: any, index: number) => (
                         <DailyWeather
+                          key={index}
                           weatherCondition={daily?.weather[0]?.main
                             ?.toString()
                             ?.toLocaleLowerCase()}
@@ -83,7 +98,7 @@ export const CityDetail = () => {
                 )}
               </div>
               <div className="w-2/5">
-                {!isLoading ? (
+                {!isLoadingWeather ? (
                   <>
                     <SunsetSunrise
                       sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
@@ -98,18 +113,9 @@ export const CityDetail = () => {
               </div>
             </div>
           </div>
-          <div id="air-quality" className="d">
+          <div id="air-quality">
             <Heading text="Air Quality Index" />
-            <div className="w-2/4 shadow-sm bg-white rounded-md p-6 space-y-3">
-              <div className="flex space-x-3 ">
-                <img src={IMAGES.wind} className="w-14 h-14" alt="wind" />
-                <div className="flex flex-col">
-                  <Heading text="Good" />
-                  <Paragraph text="A good day to walk!" />
-                </div>
-              </div>
-              <AirQualityStat value="10" unit="PM2" />
-            </div>
+            <AirQualityIndex data={list} />
           </div>
         </div>
       </PageWrapper>
