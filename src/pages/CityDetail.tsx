@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { PageWrapper } from "../components/PageWrapper";
-import { AirQualityStat } from "../components/cityDetail/AirQualityStat";
 import { CurrentWeather } from "../components/cityDetail/CurrentWeather";
 import { CurrentWeatherSkeleton } from "../components/cityDetail/CurrentWeatherSkeleton";
 import { DailyWeather } from "../components/cityDetail/DailyWeather";
@@ -8,9 +6,6 @@ import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkele
 import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
 import { SunsetSunriseSkeleton } from "../components/cityDetail/SunsetSunriseSkeleton";
 import { Heading } from "../components/titles/Heading";
-import { Paragraph } from "../components/titles/Paragraph";
-import { IMAGES } from "../constants";
-import { COLORS } from "../constants/Colors";
 import { useGetCityAirQuality } from "../states/react-query/useGetCityAirQuality";
 import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
 import {
@@ -20,11 +15,7 @@ import {
   getTime,
 } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
-import {
-  IAirQuality,
-  IAirQualityData,
-  IAirQualityListDetails,
-} from "../states/redux-store/storeTypes";
+import { IAirQualityData } from "../states/redux-store/storeTypes";
 import { AirQualityIndex } from "../components/cityDetail/AirQualityIndex";
 
 export const CityDetail = () => {
@@ -45,9 +36,7 @@ export const CityDetail = () => {
     useGetCityAirQuality(long, lat, apiKey ?? "");
 
   const { list } = cityAirPollution?.data || ({} as IAirQualityData);
-  // const {
-  //   list: [{ main = {}, components: IAirQualityComponents = {} } = {}] = [],
-  // } = cityAirPollution?.data || {};
+
   return (
     <>
       <PageWrapper>
