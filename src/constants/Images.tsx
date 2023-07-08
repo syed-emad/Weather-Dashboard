@@ -4,4 +4,5 @@ export const IMAGES = {
   sunrise: require("../assets/sun.png"),
   sunset: require("../assets/moon.png"),
   no_records: require("../assets/empty-folder.png"),
+  wind: require("../assets/wind.png"),
 };

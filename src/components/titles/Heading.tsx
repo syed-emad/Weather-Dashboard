@@ -8,7 +8,7 @@ export const Heading = ({ text, colorTheme }: Props) => {
   return (
     <div
       className={classNames(
-        "font-medium ",
+        "font-semibold",
         colorTheme ? colorTheme : "text-gray-700"
       )}
     >
