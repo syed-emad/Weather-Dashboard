@@ -1,4 +1,5 @@
 import { PageWrapper } from "../components/PageWrapper";
+import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
 import { Heading } from "../components/titles/Heading";
 import { HeadingLarge } from "../components/titles/HeadingLarge";
 import { Paragraph } from "../components/titles/Paragraph";
@@ -23,7 +24,7 @@ export const CityDetail = () => {
   const exclude = "hourly,minutely,alerts";
   console.log("long", long);
   console.log("lat", lat);
-  const { data: cityWeather } = useGetCityDetail(
+  const { data: cityWeather, isLoading } = useGetCityDetail(
     long,
     lat,
     exclude,
@@ -75,38 +76,22 @@ export const CityDetail = () => {
                   alt="cloudy"
                   className="w-14 h-w-14"
                 />
-                <Paragraph
+                <Heading
                   text={getDay(daily?.dt)?.toString()!}
                   colorTheme={COLORS.ThemeBlack}
                 />
-                <Paragraph
+                <Heading
                   text={convertToCelcius(daily?.temp?.day)?.toString()}
                   colorTheme={COLORS.ThemeBlack}
                 />
               </div>
             ))}
           </div>
-          <div className="w-2/5 bg-white rounded-lg shadow-sm flex justify-between items-center px-5">
-            <div className="flex space-x-5  h-full w-fit items-center" key={2}>
-              <img src={IMAGES.sunrise} alt="cloudy" className="w-14 h-w-14" />
-              <div className="">
-                <Paragraph text={"Sunrise"} />
-                <HeadingLarge
-                  text={getTime(cityWeather?.data?.current?.dt)}
-                  color={COLORS.Purple}
-                />
-              </div>
-            </div>
-            <div className="flex space-x-2  h-full w-fit items-center" key={31}>
-              <img src={IMAGES.sunset} alt="cloudy" className="w-14 h-w-14" />
-              <div className="">
-                <Paragraph text={"Sunrise"} />
-                <HeadingLarge
-                  text={getTime(cityWeather?.data?.current?.dt)}
-                  color={COLORS.Purple}
-                />
-              </div>
-            </div>
+          <div className="w-2/5 ">
+            <SunsetSunrise
+              sunriseTime={getTime(cityWeather?.data?.current?.sunrise)}
+              sunsetTime={getTime(cityWeather?.data?.current?.sunset)}
+            />
           </div>
         </div>
       </PageWrapper>

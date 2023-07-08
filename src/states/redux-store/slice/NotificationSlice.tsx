@@ -16,9 +16,7 @@ export const ShowNotification = createAsyncThunk<
   IThunk
 >("/notification/show", async ({ notification }, { dispatch }) => {
   try {
-    // dispatch(showNotification(notification));
     setTimeout(() => {
-      console.log("i am dispatching celaringnow");
       dispatch(ClearNotification({ notification }));
     }, 2000);
     return notification;
