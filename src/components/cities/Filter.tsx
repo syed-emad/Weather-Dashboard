@@ -8,9 +8,16 @@ import { ICitiesFilter, IDropDown } from "../../util/Types";
 import { classNames } from "../../util/Helpers";
 interface Props {
   search: ICitiesFilter;
-  setSearch: (prevState: ICitiesFilter) => void;
+  handleSearch: (prevState: ICitiesFilter) => void;
+  setSearch: (value: (prevState: ICitiesFilter) => ICitiesFilter) => void;
+  clearSearch: () => void;
 }
-export const Filter = ({ search, setSearch }: Props) => {
+export const Filter = ({
+  search,
+  handleSearch,
+  setSearch,
+  clearSearch,
+}: Props) => {
   const CountriesList: Array<IDropDown> = useSelector(ListOfCountries);
 
   const handleInputChange =
@@ -19,11 +26,15 @@ export const Filter = ({ search, setSearch }: Props) => {
       let value = evt.target.value;
       let result = { ...search, [key]: value };
 
-      setSearch(result);
+      handleSearch(result);
     };
 
   const cleatFilter = () => {
-    setSearch({} as ICitiesFilter);
+    clearSearch();
+    // setSearch((prevState: ICitiesFilter) => {
+    //   return { ...prevState, searchText: "", country: "" };
+    // });
+    // handleSearch({} as ICitiesFilter);
   };
   console.log("heeelo", search);
   return (
@@ -49,12 +60,10 @@ export const Filter = ({ search, setSearch }: Props) => {
         <button
           className={classNames(
             "flex justify-center py-2 px-4 w-full h-10 border border-transparent rounded-md shadow-sm text-sm font-medium text-white   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500",
-            search?.country?.length >= 1
-              ? " bg-rose-700 hover:bg-rose-800"
-              : "cursor-not-allowed bg-gray-300"
+            " bg-rose-700 hover:bg-rose-800"
           )}
           onClick={cleatFilter}
-          disabled={search?.country?.length > 1 ? false : true}
+          // di sabled={search?.country?.length > 1 ? false : true}
         >
           Clear Fitler
         </button>

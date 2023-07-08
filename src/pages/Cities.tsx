@@ -1,5 +1,5 @@
 import debounce from "lodash.debounce";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Notification } from "../components/Notification";
 import { PageWrapper } from "../components/PageWrapper";
@@ -7,18 +7,21 @@ import { CitiesTable } from "../components/cities/CitiesTable";
 import { Filter } from "../components/cities/Filter";
 import {
   GetCitiesLocation,
-  GetCountries,
   ListOfCities,
 } from "../states/redux-store/slice/GeoLocationSlice";
 import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
 import { AppDispatch } from "../states/redux-store/store";
 import { ICityData } from "../states/redux-store/storeTypes";
 import { ICitiesFilter } from "../util/Types";
+import { useQueryParam } from "../util/useQueryParam";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const [search, setSearch] = useState<ICitiesFilter>({} as ICitiesFilter);
+  const { getQueryParam } = useQueryParam();
+  const searchParam = getQueryParam("search");
+  const [search, setSearch] = useState<ICitiesFilter>({
+    searchText: searchParam ?? "",
+  } as ICitiesFilter);
   const citiesDetails: ICityData = useSelector(ListOfCities);
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
@@ -47,8 +50,31 @@ export const Cities = () => {
 
   const changeHandler = (event: ICitiesFilter) => {
     console.log("i am here", event);
+    appendSearchToUrl(event);
     setSearch(event);
     fethCities(event);
+  };
+
+  const appendSearchToUrl = (event: ICitiesFilter) => {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append("search", event.searchText);
+    const newURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
+    console.log("newURL", newURL);
+    window.history.pushState(null, "", newURL);
+  };
+  const handleClearSearch = async () => {
+    setSearch((prevState: ICitiesFilter) => {
+      return { ...prevState, searchText: "", country: "" };
+    });
+    appendSearchToUrl({ searchText: "", country: "" });
+    await dispatch(
+      GetCitiesLocation({
+        namePrefix: "",
+        countryIds: "",
+        offset: curentPage * 10,
+        limit: 10,
+      })
+    );
   };
 
   useEffect(() => {
@@ -58,7 +84,12 @@ export const Cities = () => {
   }, [fethCities]);
   return (
     <PageWrapper>
-      <Filter search={search} setSearch={changeHandler} />
+      <Filter
+        search={search}
+        handleSearch={changeHandler}
+        setSearch={setSearch}
+        clearSearch={handleClearSearch}
+      />
       <CitiesTable
         cities={cities}
         currentPage={curentPage}
