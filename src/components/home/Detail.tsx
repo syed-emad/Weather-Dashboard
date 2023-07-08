@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IMAGES } from "../../constants";
 import { Heading } from "../titles/Heading";
 import { Paragraph } from "../titles/Paragraph";
 import { useNavigate } from "react-router-dom";
+import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
+import {
+  GetCountries,
+  GetCitiesLocation,
+} from "../../states/redux-store/slice/GeoLocationSlice";
+import { AppDispatch } from "../../states/redux-store/store";
 
 export const Detail = () => {
   const navigate = useNavigate();
-  const hanldeNavigate = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const fetchCountries = async () => {
+    await dispatch(GetCountries({}));
+  };
+  const getCities = async () => {
+    await dispatch(GetCitiesLocation({ limit: 10 }));
+  };
+
+  const hanldeNavigate = async () => {
+    setIsLoading(true);
+    await fetchCountries();
+    await getCities();
+    setIsLoading(false);
     navigate("/cities");
   };
   return (
@@ -21,6 +41,7 @@ export const Detail = () => {
             className=" flex justify-center mt-2 py-2 px-4 w-full border border-transparent rounded-md shadow-sm text-lg text-white bg-[#81A9FB] hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={hanldeNavigate}
           >
+            {isLoading && <p>loading</p>}
             Explore
           </button>
         </div>
