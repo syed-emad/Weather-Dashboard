@@ -19,7 +19,6 @@ export const DropDown = ({
         className="bg-white w-full border-gray-900 border-2 border-opacity-5 rounded-md"
         id={dropDownKey}
         name={dropDownKey}
-        defaultValue={selectedValue}
         onChange={onChange(dropDownKey)}
         value={selectedValue}
       >

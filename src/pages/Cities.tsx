@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { ICitiesFilter } from "../util/Types";
+import { CurrentNotification } from "../states/redux-store/slice/NotificationSlice";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,7 +23,7 @@ export const Cities = () => {
   const [curentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   console.log("search", search);
-
+  const currentNotification = useSelector(CurrentNotification);
   useEffect(() => {
     const fetchCountries = async () => {
       await dispatch(GetCountries({}));
@@ -30,7 +31,7 @@ export const Cities = () => {
     fetchCountries();
   }, [dispatch]);
 
-  console.log(isLoading, "isLoading");
+  console.log(currentNotification?.show, "currentNotification");
   useEffect(() => {
     setIsLoading(true);
     const handleInputChangeDebounced = debounce(async () => {
@@ -39,7 +40,7 @@ export const Cities = () => {
       await dispatch(
         GetCitiesLocation({
           namePrefix: search?.searchText,
-          countryIds: search?.country,
+          countryIds: "abc",
           offset: curentPage * 10,
           limit: 10,
         })
@@ -56,13 +57,19 @@ export const Cities = () => {
   return (
     <PageWrapper>
       <Filter search={search} setSearch={setSearch} />
-      <CitiesTable
+
+      {/* <CitiesTable
         cities={cities}
         currentPage={curentPage}
         setCurrentPage={setCurrentPage}
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
-      />
+      /> */}
+      {currentNotification?.show && (
+        <>
+          <p>{currentNotification?.message}</p>
+        </>
+      )}
     </PageWrapper>
   );
 };

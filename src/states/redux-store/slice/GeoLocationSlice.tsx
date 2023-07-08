@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IRejectValue, IThunk } from "../storeTypes";
+import { IThunk } from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
-import { IDropDown } from "../../../util/Types";
+import { IDropDown, INotification } from "../../../util/Types";
 import { AxiosError } from "axios";
+import { ShowNotification } from "./NotificationSlice";
 interface GeoLocationState {
   cities: Array<any>;
   countries: Array<IDropDown>;
@@ -19,7 +20,10 @@ export const GetCitiesLocation = createAsyncThunk<
   IThunk
 >(
   "location/cities",
-  async ({ countryIds, namePrefix, limit, offset }, { rejectWithValue }) => {
+  async (
+    { countryIds, namePrefix, limit, offset },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       const response = await getCitiesList(
         countryIds,
@@ -31,6 +35,12 @@ export const GetCitiesLocation = createAsyncThunk<
     } catch (err: AxiosError | unknown) {
       let error: AxiosError = err as AxiosError;
       console.log("errorerrorerrorerrorerror", error);
+      let notification: INotification = {
+        error: 202,
+        message: "emad",
+        show: true,
+      };
+      dispatch(ShowNotification({ notification }));
       if (!error.response) throw err;
       return rejectWithValue(error.response);
     }
@@ -58,10 +68,9 @@ const geoLocationSlice = createSlice({
         const { payload } = action;
         state.cities = payload?.data;
       })
-      .addCase(GetCitiesLocation.rejected, (state, action) => {})
       .addCase(GetCountries.fulfilled, (state, action) => {
         const { payload } = action;
-        const data = payload.data;
+        const data = payload?.data;
         const result = data?.map((country: any) => ({
           key: country?.cca2,
           value: country?.name?.common,
