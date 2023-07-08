@@ -1,18 +1,13 @@
-import { AxiosInstance } from "axios";
+import { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 export interface IThunk {
   extra: {
     axios: AxiosInstance;
   };
-  rejectValue: IRejectValue;
+  rejectValue: AxiosResponse;
 }
 export interface IRejectValue {
-  error: APIError;
-  [property: string]: any;
-}
-export interface APIError {
-  code: number;
-  details: Array<{ message: string; field: string }>;
-  message: string;
-  type: string;
+  message?: string;
+  code?: string;
+  request?: any;
 }

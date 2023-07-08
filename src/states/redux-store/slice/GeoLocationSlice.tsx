@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IThunk } from "../storeTypes";
+import { IRejectValue, IThunk } from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
 import { IDropDown } from "../../../util/Types";
+import { AxiosError } from "axios";
 interface GeoLocationState {
   cities: Array<any>;
   countries: Array<IDropDown>;
@@ -16,12 +17,25 @@ export const GetCitiesLocation = createAsyncThunk<
   any,
   { countryIds?: string; namePrefix?: string; limit?: number; offset?: number },
   IThunk
->("location/cities", async ({ countryIds, namePrefix, limit, offset }) => {
-  try {
-    const response = await getCitiesList(countryIds, namePrefix, limit, offset);
-    return response;
-  } catch (e) {}
-});
+>(
+  "location/cities",
+  async ({ countryIds, namePrefix, limit, offset }, { rejectWithValue }) => {
+    try {
+      const response = await getCitiesList(
+        countryIds,
+        namePrefix,
+        limit,
+        offset
+      );
+      return response;
+    } catch (err: AxiosError | unknown) {
+      let error: AxiosError = err as AxiosError;
+      console.log("errorerrorerrorerrorerror", error);
+      if (!error.response) throw err;
+      return rejectWithValue(error.response);
+    }
+  }
+);
 
 export const GetCountries = createAsyncThunk<any, {}, IThunk>(
   "/countries/all",
@@ -29,7 +43,9 @@ export const GetCountries = createAsyncThunk<any, {}, IThunk>(
     try {
       const response = await getCountriesList();
       return response;
-    } catch (e) {}
+    } catch (e) {
+      console.log("errorrrr", e);
+    }
   }
 );
 const geoLocationSlice = createSlice({
@@ -42,6 +58,7 @@ const geoLocationSlice = createSlice({
         const { payload } = action;
         state.cities = payload?.data;
       })
+      .addCase(GetCitiesLocation.rejected, (state, action) => {})
       .addCase(GetCountries.fulfilled, (state, action) => {
         const { payload } = action;
         const data = payload.data;
