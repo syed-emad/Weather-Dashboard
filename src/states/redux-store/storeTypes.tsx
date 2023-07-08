@@ -57,7 +57,7 @@ export interface IAirQualityComponents {
   nh3: number;
 }
 
-interface DailyWeather {
+interface IDailyWeather {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -124,7 +124,7 @@ interface ICityWeatherData {
       icon: string;
     }[];
   };
-  daily: Array<DailyWeather>;
+  daily: Array<IDailyWeather>;
 }
 
 export interface ICityWeather {
