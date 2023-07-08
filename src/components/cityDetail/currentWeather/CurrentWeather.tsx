@@ -1,6 +1,6 @@
-import { WeatherIconsMap } from "../../constants/ImageIconMappings";
-import { HeadingLarge } from "../titles/HeadingLarge";
-import { Paragraph } from "../titles/Paragraph";
+import { WeatherIconsMap } from "../../../constants/ImageIconMappings";
+import { HeadingLarge } from "../../titles/HeadingLarge";
+import { Paragraph } from "../../titles/Paragraph";
 interface Props {
   time: string;
   date: string;

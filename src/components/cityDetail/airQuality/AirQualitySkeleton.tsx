@@ -1,6 +1,5 @@
-import React from "react";
-import { Heading } from "../titles/Heading";
-import { Paragraph } from "../titles/Paragraph";
+import { Heading } from "../../titles/Heading";
+import { Paragraph } from "../../titles/Paragraph";
 
 export const AirQualitySkeleton = () => {
   return (

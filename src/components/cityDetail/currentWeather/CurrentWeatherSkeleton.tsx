@@ -1,6 +1,5 @@
-import React from "react";
-import { HeadingLarge } from "../titles/HeadingLarge";
-import { Paragraph } from "../titles/Paragraph";
+import { HeadingLarge } from "../../titles/HeadingLarge";
+import { Paragraph } from "../../titles/Paragraph";
 
 export const CurrentWeatherSkeleton = () => {
   return (

@@ -1,4 +1,4 @@
-import { Heading } from "../titles/Heading";
+import { Heading } from "../../titles/Heading";
 
 export const DailyWeatherSkeleton = () => {
   return (

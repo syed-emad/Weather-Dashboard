@@ -1,23 +1,22 @@
-import { IMAGES } from "../../constants";
-import { Heading } from "../titles/Heading";
-import { Paragraph } from "../titles/Paragraph";
+import { IMAGES } from "../../../constants";
+import { Heading } from "../../titles/Heading";
+import { Paragraph } from "../../titles/Paragraph";
 import {
   IAirQualityComponents,
   IAirQualityListDetails,
   IAirQualityMain,
-} from "../../states/redux-store/storeTypes";
+} from "../../../states/redux-store/storeTypes";
 import { AirQualityStat } from "./AirQualityStat";
 import {
   AirQualitySuggestion,
   AirQualityValue,
-} from "../../constants/TextMapping";
+} from "../../../constants/TextMapping";
 import { AirQualitySkeleton } from "./AirQualitySkeleton";
 interface Props {
   data: Array<IAirQualityListDetails>;
   isLoading: boolean;
 }
 export const AirQualityIndex = ({ data, isLoading }: Props) => {
-  // const [{ main = {}, components = {} } = {}] = data || [] as Array<IAirQualityListDetails>;
   const components = (data as Array<IAirQualityListDetails>)
     ? data[0]?.components
     : ({} as IAirQualityComponents);

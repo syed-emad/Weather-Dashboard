@@ -1,6 +1,7 @@
-import { COLORS } from "../../constants/Colors";
-import { Heading } from "../titles/Heading";
-import { Paragraph } from "../titles/Paragraph";
+import { COLORS } from "../../../constants/Colors";
+import { Heading } from "../../titles/Heading";
+import { Paragraph } from "../../titles/Paragraph";
+
 interface Props {
   value: string;
   unit: string;

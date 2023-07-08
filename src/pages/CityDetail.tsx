@@ -1,25 +1,15 @@
 import { PageWrapper } from "../components/PageWrapper";
-import { CurrentWeather } from "../components/cityDetail/CurrentWeather";
-import { CurrentWeatherSkeleton } from "../components/cityDetail/CurrentWeatherSkeleton";
-import { DailyWeather } from "../components/cityDetail/DailyWeather";
-import { DailyWeatherSkeleton } from "../components/cityDetail/DailyWeatherSkeleton";
-import { SunsetSunrise } from "../components/cityDetail/SunsetSunrise";
-import { SunsetSunriseSkeleton } from "../components/cityDetail/SunsetSunriseSkeleton";
+import { CurrentWeather } from "../components/cityDetail/currentWeather/CurrentWeather";
+import { SunsetSunriseDisplay } from "../components/cityDetail/SunsetSunriseDisplay";
+import { AirQualityIndex } from "../components/cityDetail/airQuality/AirQualityIndex";
+import { CurrentWeatherSkeleton } from "../components/cityDetail/currentWeather/CurrentWeatherSkeleton";
+import { DailyWeatherDisplay } from "../components/cityDetail/dailyWeather/DailyWeatherDisplay";
 import { Heading } from "../components/titles/Heading";
 import { useGetCityAirQuality } from "../states/react-query/useGetCityAirQuality";
 import { useGetCityDetail } from "../states/react-query/useGetCityDetail";
-import {
-  convertToCelcius,
-  getDay,
-  getFormattedDate,
-  getTime,
-} from "../util/Helpers";
+import { IAirQualityData } from "../states/redux-store/storeTypes";
+import { convertToCelcius, getFormattedDate, getTime } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
-import {
-  IAirQualityData,
-  IDailyWeather,
-} from "../states/redux-store/storeTypes";
-import { AirQualityIndex } from "../components/cityDetail/AirQualityIndex";
 
 export const CityDetail = () => {
   const { getQueryParam } = useQueryParam();
@@ -65,47 +55,19 @@ export const CityDetail = () => {
             </div>
             <div className="flex space-x-5">
               <div className="flex space-x-5 w-3/5">
-                {!isLoadingWeather ? (
-                  <>
-                    {cityWeather?.data?.daily?.map(
-                      (daily: IDailyWeather, index: number) => (
-                        <DailyWeather
-                          key={index}
-                          weatherCondition={daily?.weather[0]?.main
-                            ?.toString()
-                            ?.toLocaleLowerCase()}
-                          index={index}
-                          day={getDay(daily?.dt)?.toString()!}
-                          temperature={convertToCelcius(
-                            daily?.temp?.day
-                          )?.toString()}
-                        />
-                      )
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <DailyWeatherSkeleton />
-                  </>
-                )}
+                <DailyWeatherDisplay
+                  isLoading={isLoadingWeather}
+                  dailyWeather={cityWeather?.data?.daily ?? []}
+                />
               </div>
               <div className="w-2/5">
-                {!isLoadingWeather ? (
-                  <>
-                    <SunsetSunrise
-                      sunriseTime={getTime(
-                        cityWeather?.data?.current?.sunrise ?? 0
-                      )}
-                      sunsetTime={getTime(
-                        cityWeather?.data?.current?.sunset ?? 0
-                      )}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <SunsetSunriseSkeleton />
-                  </>
-                )}
+                <SunsetSunriseDisplay
+                  isLoading={isLoadingWeather}
+                  sunriseTime={getTime(
+                    cityWeather?.data?.current?.sunrise ?? 0
+                  )}
+                  sunsetTime={getTime(cityWeather?.data?.current?.sunset ?? 0)}
+                />
               </div>
             </div>
           </div>

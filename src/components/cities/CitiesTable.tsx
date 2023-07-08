@@ -1,8 +1,6 @@
 import { Pagination } from "../Pagination";
 import { useNavigate } from "react-router-dom";
 import { CitiesTableSkeleton } from "./CitiesTableSkeleton";
-import { IMAGES } from "../../constants";
-import { Heading } from "../titles/Heading";
 import { NoTableRecords } from "./NoTableRecords";
 import { ICity } from "../../states/redux-store/storeTypes";
 

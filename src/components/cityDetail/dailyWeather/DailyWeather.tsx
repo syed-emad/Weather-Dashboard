@@ -1,6 +1,6 @@
-import { COLORS } from "../../constants/Colors";
-import { WeatherIconsMap } from "../../constants/ImageIconMappings";
-import { Heading } from "../titles/Heading";
+import { COLORS } from "../../../constants/Colors";
+import { WeatherIconsMap } from "../../../constants/ImageIconMappings";
+import { Heading } from "../../titles/Heading";
 interface Props {
   weatherCondition: string;
   index: number;
