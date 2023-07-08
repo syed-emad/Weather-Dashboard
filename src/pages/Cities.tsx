@@ -32,12 +32,11 @@ export const Cities = () => {
     fetchCountries();
   }, [dispatch]);
 
-  console.log(currentNotification?.show, "currentNotification");
   useEffect(() => {
     setIsLoading(true);
     const handleInputChangeDebounced = debounce(async () => {
       setIsLoading(true);
-      console.log(search, "search222");
+
       await dispatch(
         GetCitiesLocation({
           namePrefix: search?.searchText,
@@ -59,22 +58,19 @@ export const Cities = () => {
     <PageWrapper>
       <Filter search={search} setSearch={setSearch} />
 
-      {/* <CitiesTable
+      <CitiesTable
         cities={cities}
         currentPage={curentPage}
         setCurrentPage={setCurrentPage}
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
-      /> */}
-      {true && (
-        <>
-          <Notification
-            code={currentNotification?.error}
-            message={currentNotification?.message}
-            show={currentNotification?.show}
-          />
-        </>
-      )}
+      />
+
+      <Notification
+        code={currentNotification?.error}
+        message={currentNotification?.message}
+        show={currentNotification?.show}
+      />
     </PageWrapper>
   );
 };

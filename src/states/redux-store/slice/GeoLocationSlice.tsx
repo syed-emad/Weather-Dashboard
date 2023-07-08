@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IThunk } from "../storeTypes";
+import { IRapidAPIRejectValue, IThunk, Testing } from "../storeTypes";
 import { getCitiesList, getCountriesList } from "../serivce/GeoLocationService";
 import { RootState } from "../store";
 import { IDropDown, INotification } from "../../../util/Types";
@@ -33,11 +33,13 @@ export const GetCitiesLocation = createAsyncThunk<
       );
       return response;
     } catch (err: AxiosError | unknown) {
-      let error: AxiosError = err as AxiosError;
-      console.log("errorerrorerrorerrorerror", error);
+      let error: AxiosError<IRapidAPIRejectValue> =
+        err as AxiosError<IRapidAPIRejectValue>;
       let notification: INotification = {
-        error: 202,
-        message: "emad",
+        error: error.response?.status ?? 401,
+        message:
+          error.response?.data.errors[0].message.toString() ??
+          "Some Error Occured",
         show: true,
       };
       dispatch(ShowNotification({ notification }));
@@ -53,9 +55,7 @@ export const GetCountries = createAsyncThunk<any, {}, IThunk>(
     try {
       const response = await getCountriesList();
       return response;
-    } catch (e) {
-      console.log("errorrrr", e);
-    }
+    } catch (e) {}
   }
 );
 const geoLocationSlice = createSlice({

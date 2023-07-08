@@ -10,14 +10,20 @@ interface Props {
 export const Notification = ({ message, code, show }: Props) => {
   return (
     <>
-      <div aria-live="assertive" className=" ">
-        <div className="fixed inset-0 flex items-start mt-5 mr-2 justify-end ">
+      <div
+        aria-live="assertive"
+        className="fixed inset-0  flex items-start pointer-events-none mt-5 mr-2 justify-end z-50 "
+      >
+        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
           <Transition
             show={show}
             as={Fragment}
             enter="duration-300 ease-out"
             enterFrom="opacity-0 translate-x-4"
             enterTo="opacity-100 translate-x-0"
+            leave="duration-300 ease-in"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
             <div className="max-w-sm w-full bg-white rounded-lg shadow px-4 py-5 ">
               <div className="flex item-start items-center space-x-2">

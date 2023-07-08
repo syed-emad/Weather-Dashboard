@@ -13,3 +13,15 @@ export interface IRejectValue {
   code?: string;
   request?: any;
 }
+
+export interface Testing {
+  error: IRapidAPIRejectValue;
+}
+export interface IRapidAPIRejectValue {
+  errors: Array<IRapidApIErrorObj>;
+}
+
+export interface IRapidApIErrorObj {
+  code: string;
+  message: string;
+}
