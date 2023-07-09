@@ -56,7 +56,7 @@ export const CitiesTable = ({
                       cities?.map((city: ICity, index: number) => (
                         <tr
                           key={index}
-                          className="hover:bg-gray-50"
+                          className="hover:bg-gray-100 cursor-pointer"
                           onClick={() =>
                             handleRowClick(city.longitude, city.latitude)
                           }
