@@ -30,7 +30,7 @@ export const Detail = () => {
   };
   return (
     <div className="md:w-1/2 w-full flex items-center ">
-      <div className="pl-10 space-y-5 w-full flex justify-center">
+      <div className="md:pl-10 space-y-5 w-full flex justify-center">
         <div className="flex flex-col  items-center ">
           <img
             src={IMAGES.main_logo}
