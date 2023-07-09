@@ -1,4 +1,4 @@
-import { COLORS } from "../../../constants/Colors";
+import { COLORS } from "../../../constants";
 import { WeatherIconsMap } from "../../../constants/ImageIconMappings";
 import { Heading } from "../../titles/Heading";
 interface Props {

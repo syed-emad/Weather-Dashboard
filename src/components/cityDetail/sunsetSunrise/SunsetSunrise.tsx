@@ -22,7 +22,7 @@ export const SunsetSunrise = ({
       <div className="flex space-x-2  h-full w-fit items-center" key={31}>
         <img src={IMAGES.sunset} alt="cloudy" className="w-14 h-w-14" />
         <div className="">
-          <Paragraph text={"Sunrise"} />
+          <Paragraph text={"Sunset"} />
           <HeadingLarge text={sunsetTime} color={COLORS.Purple} />
         </div>
       </div>

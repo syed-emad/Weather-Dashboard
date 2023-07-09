@@ -1,4 +1,4 @@
-import { COLORS } from "../../constants/Colors";
+import { COLORS } from "../../constants";
 import { classNames } from "../../util/Helpers";
 interface Props {
   text: string;

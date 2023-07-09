@@ -15,6 +15,7 @@ import { ICityData } from "../states/redux-store/storeTypes";
 import { ICitiesFilter } from "../util/Types";
 import { useQueryParam } from "../util/useQueryParam";
 import { useNavigate } from "react-router-dom";
+import { TEXT } from "../constants";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -85,7 +86,7 @@ export const Cities = () => {
         namePrefix: "",
         countryIds: "",
         offset: 0,
-        limit: 10,
+        limit: TEXT.MaxPageLimit,
       })
     );
   };
