@@ -31,7 +31,6 @@ export const Filter = ({
   const cleatFilter = () => {
     clearSearch();
   };
-  console.log("heeelo", search);
   return (
     <div className="flex items-center space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md ">
       <div className="w-3/6">

@@ -37,7 +37,6 @@ export const Cities = () => {
 
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
-  console.log(paginationData, "paginationData");
   const fethCities = useMemo(
     () =>
       debounce(async (event: ICitiesFilter) => {

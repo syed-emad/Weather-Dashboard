@@ -12,7 +12,6 @@ export const DropDown = ({
   onChange,
   list,
 }: Props) => {
-  console.log("sleected", selectedValue);
   return (
     <div className="w-full">
       <select

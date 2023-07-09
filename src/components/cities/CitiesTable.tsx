@@ -21,7 +21,6 @@ export const CitiesTable = ({
   isLoading,
 }: Props) => {
   const navigate = useNavigate();
-  console.log("totalPages", totalPages);
   const handlePageChange = (page: { selected: number }) => {
     var selectedPage = page?.selected;
     hanldePageChange(selectedPage);
