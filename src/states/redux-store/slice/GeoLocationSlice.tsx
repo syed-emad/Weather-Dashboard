@@ -33,7 +33,7 @@ const getMessageFromErrorResponse = (responseData: IRapidAPIRejectValue) => {
     responseData?.errors?.length != null &&
     responseData?.errors?.length > 0
   ) {
-    message = responseData?.errors[0].message;
+    message = responseData?.errors[0].message + " Please clear filter";
   }
   return message;
 };
