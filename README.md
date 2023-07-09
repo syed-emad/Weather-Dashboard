@@ -1,8 +1,11 @@
-# Getting Started with Create React App
+### Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Weatherly application provides users with a convenient way to explore weather details of various cities.
+User can filter city based on name and country.
+To obtain more detailed information about a specific city's weather, users can click on the desired city from the list.
+This action redirects them to a dedicated page where they can access in-depth weather details. Such as current weather, weekly weather and air quality.
 
-## Setup
+### Setup
 
 ### Clone your repository
 
