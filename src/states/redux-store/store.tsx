@@ -21,7 +21,6 @@ export const store = configureStore({
       thunk: {
         extraArgument: { axios: openWeatherApi, axios1: geoDBApi },
       },
-      serializableCheck: false,
     }),
 });
 
