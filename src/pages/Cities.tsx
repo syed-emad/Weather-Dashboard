@@ -14,25 +14,28 @@ import { AppDispatch } from "../states/redux-store/store";
 import { ICityData } from "../states/redux-store/storeTypes";
 import { ICitiesFilter } from "../util/Types";
 import { useQueryParam } from "../util/useQueryParam";
+import { useNavigate } from "react-router-dom";
 
 export const Cities = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { getQueryParam } = useQueryParam();
   const searchParam = getQueryParam("search");
   const countryParam = getQueryParam("country");
   const currentPage = getQueryParam("currentPage");
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<ICitiesFilter>({
     searchText: searchParam ?? "",
     country: countryParam ?? "",
     currentPage: currentPage ?? 0,
   } as ICitiesFilter);
-  const citiesDetails: ICityData = useSelector(ListOfCities);
-  const cities = citiesDetails?.data;
-  const paginationData = citiesDetails?.metadata;
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const currentNotification = useSelector(CurrentNotification);
+  const citiesDetails: ICityData = useSelector(ListOfCities);
+
+  const cities = citiesDetails?.data;
+  const paginationData = citiesDetails?.metadata;
 
   const fethCities = useMemo(
     () =>
@@ -64,14 +67,14 @@ export const Cities = () => {
     urlSearchParams.append("country", event?.country);
     urlSearchParams.append("pg", event?.currentPage?.toString());
     const newURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
-    console.log("newURL", newURL);
     window.history.pushState(null, "", newURL);
   };
 
-  const hanldePageChange = (page: number) => {
+  const handlePageChange = (page: number) => {
     appendSearchToUrl({ ...search, currentPage: page });
     fethCities({ ...search, currentPage: page });
   };
+
   const handleClearSearch = async () => {
     setSearch((prevState: ICitiesFilter) => {
       return { ...prevState, searchText: "", country: "" };
@@ -92,6 +95,17 @@ export const Cities = () => {
       fethCities.cancel();
     };
   }, [fethCities]);
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigate("/");
+    };
+    window.addEventListener("popstate", handleBackPress);
+    return () => {
+      window.removeEventListener("popstate", handleBackPress);
+    };
+  }, [navigate]);
+
   return (
     <PageWrapper>
       <Filter
@@ -102,7 +116,7 @@ export const Cities = () => {
       <CitiesTable
         cities={cities}
         currentPage={search?.currentPage}
-        hanldePageChange={hanldePageChange}
+        hanldePageChange={handlePageChange}
         totalPages={paginationData?.totalCount}
         isLoading={isLoading}
       />
