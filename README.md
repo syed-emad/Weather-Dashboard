@@ -17,7 +17,7 @@ State Management (Only for react): Redux
 
 ### Setup
 
-### 1.Clone your repository
+### 1. Clone your repository
 
 Click on the "Code" button and copy the repository's URL.
 Open your terminal or command prompt.
@@ -31,13 +31,13 @@ If you have GithubDesktop
 Click on code and select Open with Github desktop.
 Set up the local path and click on Clone button.
 
-### 2.Install Node Modules
+### 2. Install Node Modules
 
 Navigate into the cloned repository directory using cd `<repository-name>`.
 
 Run the following command to install the required dependencies specified in the package.json file:
 
-### 3.Start Application
+### 3. Start Application
 
 After the installation is complete, run the following command to launch the React application
 
