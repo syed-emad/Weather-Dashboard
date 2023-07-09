@@ -21,7 +21,7 @@ export const CitiesTable = ({
   isLoading,
 }: Props) => {
   const navigate = useNavigate();
-
+  console.log("totalPages", totalPages);
   const handlePageChange = (page: { selected: number }) => {
     var selectedPage = page?.selected;
     hanldePageChange(selectedPage);
@@ -31,7 +31,6 @@ export const CitiesTable = ({
     navigate(`/city/detail?long=${long}&lat=${lat}`);
   };
 
-  console.log("testing", cities);
   return (
     <div className="w-full">
       <div className="overflow-hidden shadow rounded-lg bg-pink-100 ">
@@ -66,9 +65,15 @@ export const CitiesTable = ({
                           <td className="py-4 pl-4 text-sm text-gray-700">
                             {city.name}
                           </td>
-                          <td>{city.country}</td>
-                          <td>{city.region}</td>
-                          <td>{city.population}</td>
+                          <td className="py-4 pl-4 text-sm text-gray-700">
+                            {city.country}
+                          </td>
+                          <td className="py-4 pl-4 text-sm text-gray-700">
+                            {city.region}
+                          </td>
+                          <td className="py-4 pl-4 text-sm text-gray-700">
+                            {city.population}
+                          </td>
                         </tr>
                       ))}
                   </>

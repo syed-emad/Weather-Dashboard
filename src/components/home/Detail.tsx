@@ -32,8 +32,12 @@ export const Detail = () => {
     <div className="w-1/2 flex items-center ">
       <div className="pl-10 space-y-5 w-full flex justify-center">
         <div className="flex flex-col  items-center ">
-          <img src={IMAGES.main_logo} className="h-20 w-20" alt="main-logo" />
-          <Heading text="Welcom to Weatherly" />
+          <img
+            src={IMAGES.main_logo}
+            className="h-20 w-20 mb-4"
+            alt="main-logo"
+          />
+          <Heading text="Welcome to Weatherly" />
           <Paragraph text="See weather details of any city" />
           <button
             type="submit"

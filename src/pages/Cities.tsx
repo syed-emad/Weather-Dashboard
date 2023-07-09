@@ -36,7 +36,7 @@ export const Cities = () => {
 
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
-
+  console.log(paginationData, "paginationData");
   const fethCities = useMemo(
     () =>
       debounce(async (event: ICitiesFilter) => {
@@ -117,7 +117,7 @@ export const Cities = () => {
         cities={cities}
         currentPage={search?.currentPage}
         hanldePageChange={handlePageChange}
-        totalPages={paginationData?.totalCount}
+        totalPages={Math.ceil(paginationData?.totalCount / 10)}
         isLoading={isLoading}
       />
       <Notification
