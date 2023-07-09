@@ -4,7 +4,7 @@ import { IMAGES } from "../../constants";
 export const Banner = () => {
   return (
     <div
-      className="hidden sm:hidden pl-20 pt-32 text-white text-xl lg:block relative w-1/2 space-y-10 flex-1 flex-col bg-[#81A9FB]"
+      className="hidden pl-20 pt-32 text-white text-xl  md:block  relative md:w-1/2 space-y-10 flex-1 flex-col bg-[#81A9FB]"
       style={{
         backgroundImage: `url(${IMAGES.banner})`,
       }}

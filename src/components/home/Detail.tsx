@@ -29,7 +29,7 @@ export const Detail = () => {
     navigate("/cities");
   };
   return (
-    <div className="w-1/2 flex items-center ">
+    <div className="md:w-1/2 w-full flex items-center ">
       <div className="pl-10 space-y-5 w-full flex justify-center">
         <div className="flex flex-col  items-center ">
           <img
