@@ -10,7 +10,7 @@ export const useGetCityAirQuality = (
 ) => {
   const { data, isLoading } = useQuery(
     [`getAirPollution-${long + lat}`],
-    () => getCityAirQuality(long, lat, appId),
+    () => getCityAirQuality(lat, long, appId),
     {
       refetchOnWindowFocus: false,
       onSuccess: async (response: IAirQuality) => {
