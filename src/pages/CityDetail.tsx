@@ -10,6 +10,7 @@ import { convertToCelcius, getFormattedDate, getTime } from "../util/Helpers";
 import { useQueryParam } from "../util/useQueryParam";
 import { CurrentWeatherDisplay } from "../components/cityDetail/currentWeather/CurrentWeatherDisplay";
 import { SunsetSunriseDisplay } from "../components/cityDetail/sunsetSunrise/SunsetSunriseDisplay";
+import { TEXT } from "../constants";
 
 export const CityDetail = () => {
   const { getQueryParam } = useQueryParam();
@@ -42,7 +43,7 @@ export const CityDetail = () => {
               weather={
                 convertToCelcius(
                   cityWeather?.data.current?.temp ?? 0
-                )?.toString() + "C"
+                )?.toString() + TEXT.DegreeSign
               }
             />
           </div>

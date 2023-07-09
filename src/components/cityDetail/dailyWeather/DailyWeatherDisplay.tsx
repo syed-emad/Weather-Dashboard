@@ -3,6 +3,7 @@ import { IDailyWeather } from "../../../states/redux-store/storeTypes";
 import { getDay, convertToCelcius } from "../../../util/Helpers";
 import { DailyWeather } from "./DailyWeather";
 import { DailyWeatherSkeleton } from "./DailyWeatherSkeleton";
+import { TEXT } from "../../../constants";
 
 interface Props {
   isLoading: boolean;
@@ -24,7 +25,9 @@ export const DailyWeatherDisplay = ({
                 ?.toLocaleLowerCase()}
               index={index}
               day={getDay(daily?.dt)?.toString()!}
-              temperature={convertToCelcius(daily?.temp?.day)?.toString()}
+              temperature={
+                convertToCelcius(daily?.temp?.day)?.toString() + TEXT.DegreeSign
+              }
             />
           ))}
         </>
