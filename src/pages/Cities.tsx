@@ -29,7 +29,7 @@ export const Cities = () => {
   const citiesDetails: ICityData = useSelector(ListOfCities);
   const cities = citiesDetails?.data;
   const paginationData = citiesDetails?.metadata;
-  // const [curentPage, setCurrentPage] = useState(0);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const currentNotification = useSelector(CurrentNotification);
@@ -67,13 +67,7 @@ export const Cities = () => {
     console.log("newURL", newURL);
     window.history.pushState(null, "", newURL);
   };
-  // const appendToUrl = (key: string, value: string) => {
-  //   const urlSearchParams = new URLSearchParams(window.location.search);
-  //   urlSearchParams.append(key, value);
-  //   const newURL = `${window.location.pathname}?${urlSearchParams.toString()}`;
-  //   console.log("newURL", newURL);
-  //   window.history.pushState(null, "", newURL);
-  // };
+
   const hanldePageChange = (page: number) => {
     appendSearchToUrl({ ...search, currentPage: page });
     fethCities({ ...search, currentPage: page });
