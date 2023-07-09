@@ -9,6 +9,10 @@ This action redirects them to a dedicated page where they can access in-depth we
 
 [Weatherly Live Demo](https://weather-dashboard-alpha.vercel.app/)
 
+### Application Documentation
+
+[Weatherly Documentation](https://docs.google.com/document/d/1Jb8El1pXFT08i4v9wL2edRTSNM7PAD-p6vT7qYYuEGo/edit?usp=sharing)
+
 ### Decisions and Assumptions
 
 CSS/Styling : Tailwind CSS
