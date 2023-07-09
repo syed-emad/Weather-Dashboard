@@ -9,4 +9,5 @@ export const IMAGES = {
   apollo_logo: require("../assets/apollo-logo.png"),
   main_logo: require("../assets/main-logo.png"),
   banner: require("../assets/banner.png"),
+  loading: require("../assets/loading.png"),
 };

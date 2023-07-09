@@ -40,7 +40,13 @@ export const Detail = () => {
             className=" flex justify-center mt-2 py-2 px-4 w-full border border-transparent rounded-md shadow-sm text-lg text-white bg-[#81A9FB] hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={hanldeNavigate}
           >
-            {isLoading && <p>loading</p>}
+            {isLoading && (
+              <img
+                src={IMAGES.loading}
+                alt="loading"
+                className="h-6 w-6 animate-spin mr-2"
+              />
+            )}
             Explore
           </button>
         </div>
