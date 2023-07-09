@@ -11,8 +11,8 @@ export const SunsetSunrise = ({
   sunsetTime = "00:00 PM",
 }: Props) => {
   return (
-    <div className="w-full bg-white rounded-lg shadow-sm flex justify-between items-center px-5 h-full">
-      <div className="flex space-x-5  h-full w-fit items-center" key={2}>
+    <div className="w-full bg-white rounded-lg shadow-sm flex lg:flex-row flex-col space-y-8 lg:space-y-0 py-5 lg:py-0 justify-between items-center px-5 h-full">
+      <div className="flex space-x-5 h-full w-fit items-center" key={2}>
         <img src={IMAGES.sunrise} alt="cloudy" className="w-14 h-w-14" />
         <div className="">
           <Paragraph text={"Sunrise"} />

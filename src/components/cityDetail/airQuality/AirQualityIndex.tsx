@@ -27,7 +27,7 @@ export const AirQualityIndex = ({ data, isLoading }: Props) => {
     <>
       {!isLoading ? (
         <>
-          <div className="w-2/4 shadow-sm bg-white rounded-lg p-6 space-y-3">
+          <div className="xl:w-1/2 w-full shadow-sm bg-white rounded-lg p-6 space-y-3">
             <div className="flex space-x-3 ">
               <img src={IMAGES.wind} className="w-14 h-14" alt="wind" />
               <div className="flex flex-col">
@@ -36,7 +36,7 @@ export const AirQualityIndex = ({ data, isLoading }: Props) => {
               </div>
             </div>
 
-            <div className="flex space-x-5">
+            <div className="flex lg:space-x-5 lg:w-full  flex-col lg:flex-row space-y-5 lg:space-y-0">
               {Object.entries(components).map(([key, value], index) => (
                 <AirQualityStat
                   value={value?.toString() ?? ""}

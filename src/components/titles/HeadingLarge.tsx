@@ -5,5 +5,9 @@ interface Props {
   color?: string;
 }
 export const HeadingLarge = ({ text, color = COLORS.ThemeBlack }: Props) => {
-  return <h1 className={classNames("font-medium text-5xl ", color)}>{text}</h1>;
+  return (
+    <h1 className={classNames("font-medium sm:text-5xl text-2xl", color)}>
+      {text}
+    </h1>
+  );
 };

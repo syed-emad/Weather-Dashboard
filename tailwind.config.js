@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
       },
+      screens: {
+        xxl: { min: "2000px" },
+      },
     },
   },
   variants: {

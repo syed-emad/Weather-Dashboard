@@ -51,14 +51,14 @@ export const CityDetail = () => {
             <div className="mb-2">
               <Heading text="Daily Forcast" />
             </div>
-            <div className="flex space-x-5">
-              <div className="flex space-x-5 w-3/5">
+            <div className="flex lg:space-x-5 lg:flex-row flex-col space-y-5 lg:space-y-0">
+              <div className="xl:flex xl:space-x-5 lg:w-3/5  xl:space-y-0 w-full space-y-5 justify-between ">
                 <DailyWeatherDisplay
                   isLoading={isLoadingWeather}
                   dailyWeather={cityWeather?.data?.daily ?? []}
                 />
               </div>
-              <div className="w-2/5">
+              <div className="lg:w-2/5 w-full h-auto ">
                 <SunsetSunriseDisplay
                   isLoading={isLoadingWeather}
                   sunriseTime={getTime(
