@@ -21,7 +21,7 @@ export const Detail = () => {
     await dispatch(GetCitiesLocation({ limit: TEXT.MaxPageLimit }));
   };
 
-  const hanldeNavigate = async () => {
+  const handleNavigate = async () => {
     setIsLoading(true);
     await fetchCountries();
     await getCities();
@@ -42,7 +42,7 @@ export const Detail = () => {
           <button
             type="submit"
             className=" flex justify-center mt-2 py-2 px-4 w-full border border-transparent rounded-md shadow-sm text-lg text-white bg-[#81A9FB] hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={hanldeNavigate}
+            onClick={handleNavigate}
           >
             {isLoading && (
               <img
