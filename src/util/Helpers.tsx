@@ -15,6 +15,7 @@ export const getDay = (timestamp: number) => {
 
 export const getTime = (timeStamp: number) => {
   if (timeStamp === null || timeStamp === undefined) return "";
+  if (timeStamp === 0) return "N/A";
   return DateTime.fromSeconds(timeStamp).toFormat("h:mm a");
 };
 
