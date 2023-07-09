@@ -32,8 +32,8 @@ export const Filter = ({
     clearSearch();
   };
   return (
-    <div className="flex items-center space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md ">
-      <div className="w-3/6">
+    <div className="flex items-center space-x-2 w-full p-6 mb-5 shadow-sm bg-white rouded-md md:flex-row  flex-col">
+      <div className="md:w-3/6 w-full">
         <Heading text="Search" />
         <TextBox
           value={search.searchText}
@@ -41,7 +41,7 @@ export const Filter = ({
           onChange={handleInputChange}
         />
       </div>
-      <div className="w-2/6">
+      <div className="md:w-2/6 w-full">
         <Heading text="Country" />
         <DropDown
           dropDownKey="country"
@@ -50,14 +50,13 @@ export const Filter = ({
           onChange={handleInputChange}
         />
       </div>
-      <div className="w-1/6 mt-6">
+      <div className="md:w-1/6 mt-6 w-full">
         <button
           className={classNames(
             "flex justify-center py-2 px-4 w-full h-10 border border-transparent rounded-md shadow-sm text-sm font-medium text-white   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500",
             " bg-rose-700 hover:bg-rose-800"
           )}
           onClick={cleatFilter}
-          // di sabled={search?.country?.length > 1 ? false : true}
         >
           Clear Fitler
         </button>

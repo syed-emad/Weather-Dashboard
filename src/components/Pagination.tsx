@@ -31,7 +31,7 @@ export const Pagination = ({
         nextLinkClassName={"px-4 py-2 m-1  "}
         previousLinkClassName={"px-4 py-2 m-1  "}
         breakLinkClassName={"px-4 py-2  "}
-        containerClassName={"flex"}
+        containerClassName={"flex overflow-x-auto overflow-y-hidden"}
       />
     </>
   );
