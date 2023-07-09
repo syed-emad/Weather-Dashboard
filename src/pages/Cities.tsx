@@ -23,7 +23,7 @@ export const Cities = () => {
   const { getQueryParam } = useQueryParam();
   const searchParam = getQueryParam("search");
   const countryParam = getQueryParam("country");
-  const currentPage = getQueryParam("currentPage");
+  const currentPage = parseInt(getQueryParam("pg") || "") || 0;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<ICitiesFilter>({
@@ -31,7 +31,6 @@ export const Cities = () => {
     country: countryParam ?? "",
     currentPage: currentPage ?? 0,
   } as ICitiesFilter);
-
   const currentNotification = useSelector(CurrentNotification);
   const citiesDetails: ICityData = useSelector(ListOfCities);
 
@@ -72,12 +71,13 @@ export const Cities = () => {
 
   const handlePageChange = (page: number) => {
     appendSearchToUrl({ ...search, currentPage: page });
+    setSearch({ ...search, currentPage: page });
     fethCities({ ...search, currentPage: page });
   };
 
   const handleClearSearch = async () => {
     setSearch((prevState: ICitiesFilter) => {
-      return { ...prevState, searchText: "", country: "" };
+      return { ...prevState, searchText: "", country: "", currentPage: 0 };
     });
     appendSearchToUrl({ searchText: "", country: "", currentPage: 0 });
     await dispatch(
