@@ -7,7 +7,7 @@ This action redirects them to a dedicated page where they can access in-depth we
 
 ### Live Demo
 
-- [Live Demo](https://weather-dashboard-alpha.vercel.app/)
+[Weatherly Live Demo](https://weather-dashboard-alpha.vercel.app/)
 
 ### Decisions and Assumptions
 
