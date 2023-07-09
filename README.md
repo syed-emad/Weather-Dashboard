@@ -5,17 +5,39 @@ User can filter city based on name and country.
 To obtain more detailed information about a specific city's weather, users can click on the desired city from the list.
 This action redirects them to a dedicated page where they can access in-depth weather details. Such as current weather, weekly weather and air quality.
 
+### Live Demo
+
+- [Live Demo](https://weather-dashboard-alpha.vercel.app/)
+
+### Decisions and Assumptions
+
+CSS/Styling : Tailwind CSS
+API Integration: Axios
+State Management (Only for react): Redux
+
 ### Setup
 
-### Clone your repository
+### 1.Clone your repository
 
-### Install Node Modules
+Click on the "Code" button and copy the repository's URL.
+Open your terminal or command prompt.
+Navigate to the directory where you want to clone the repository.
+Run the following command, replacing `<repository-url>` with the actual repository URL:
+git clone `<repository-url>`
+
+OR
+
+If you have GithubDesktop
+Click on code and select Open with Github desktop.
+Set up the local path and click on Clone button.
+
+### 2.Install Node Modules
 
 Navigate into the cloned repository directory using cd `<repository-name>`.
 
 Run the following command to install the required dependencies specified in the package.json file:
 
-### Start Application
+### 3.Start Application
 
 After the installation is complete, run the following command to launch the React application
 
